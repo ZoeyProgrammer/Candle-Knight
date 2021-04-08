@@ -1591,6 +1591,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 545790155023790556, guid: 02a461a8870c28040a42ac766f733147, type: 3}
+      propertyPath: nextScene
+      value: LV3
+      objectReference: {fileID: 0}
     - target: {fileID: 4213119888562293345, guid: 02a461a8870c28040a42ac766f733147, type: 3}
       propertyPath: m_Name
       value: Stairs
