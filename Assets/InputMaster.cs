@@ -65,6 +65,22 @@ public class @InputMaster : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Reset"",
+                    ""type"": ""Button"",
+                    ""id"": ""5ebc55ea-44fa-43ae-af7f-228628fb15a1"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Menu"",
+                    ""type"": ""Button"",
+                    ""id"": ""472bad11-83d2-4c31-bc51-882f6b6ee0ba"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -197,6 +213,28 @@ public class @InputMaster : IInputActionCollection, IDisposable
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",
                     ""action"": ""Right"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f843a595-83d4-40bc-b016-e69450fa766b"",
+                    ""path"": ""<Keyboard>/r"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Reset"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b305808c-cf26-4950-adf7-c478a9e194d0"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Menu"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -826,6 +864,8 @@ public class @InputMaster : IInputActionCollection, IDisposable
         m_Player_Backwards = m_Player.FindAction("Backwards", throwIfNotFound: true);
         m_Player_Left = m_Player.FindAction("Left", throwIfNotFound: true);
         m_Player_Right = m_Player.FindAction("Right", throwIfNotFound: true);
+        m_Player_Reset = m_Player.FindAction("Reset", throwIfNotFound: true);
+        m_Player_Menu = m_Player.FindAction("Menu", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -897,6 +937,8 @@ public class @InputMaster : IInputActionCollection, IDisposable
     private readonly InputAction m_Player_Backwards;
     private readonly InputAction m_Player_Left;
     private readonly InputAction m_Player_Right;
+    private readonly InputAction m_Player_Reset;
+    private readonly InputAction m_Player_Menu;
     public struct PlayerActions
     {
         private @InputMaster m_Wrapper;
@@ -907,6 +949,8 @@ public class @InputMaster : IInputActionCollection, IDisposable
         public InputAction @Backwards => m_Wrapper.m_Player_Backwards;
         public InputAction @Left => m_Wrapper.m_Player_Left;
         public InputAction @Right => m_Wrapper.m_Player_Right;
+        public InputAction @Reset => m_Wrapper.m_Player_Reset;
+        public InputAction @Menu => m_Wrapper.m_Player_Menu;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -934,6 +978,12 @@ public class @InputMaster : IInputActionCollection, IDisposable
                 @Right.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRight;
                 @Right.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRight;
                 @Right.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRight;
+                @Reset.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnReset;
+                @Reset.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnReset;
+                @Reset.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnReset;
+                @Menu.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMenu;
+                @Menu.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMenu;
+                @Menu.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMenu;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -956,6 +1006,12 @@ public class @InputMaster : IInputActionCollection, IDisposable
                 @Right.started += instance.OnRight;
                 @Right.performed += instance.OnRight;
                 @Right.canceled += instance.OnRight;
+                @Reset.started += instance.OnReset;
+                @Reset.performed += instance.OnReset;
+                @Reset.canceled += instance.OnReset;
+                @Menu.started += instance.OnMenu;
+                @Menu.performed += instance.OnMenu;
+                @Menu.canceled += instance.OnMenu;
             }
         }
     }
@@ -1159,6 +1215,8 @@ public class @InputMaster : IInputActionCollection, IDisposable
         void OnBackwards(InputAction.CallbackContext context);
         void OnLeft(InputAction.CallbackContext context);
         void OnRight(InputAction.CallbackContext context);
+        void OnReset(InputAction.CallbackContext context);
+        void OnMenu(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

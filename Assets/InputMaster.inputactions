@@ -52,6 +52,22 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
+                },
+                {
+                    "name": "Reset",
+                    "type": "Button",
+                    "id": "5ebc55ea-44fa-43ae-af7f-228628fb15a1",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "Menu",
+                    "type": "Button",
+                    "id": "472bad11-83d2-4c31-bc51-882f6b6ee0ba",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -184,6 +200,28 @@
                     "processors": "",
                     "groups": "Keyboard&Mouse",
                     "action": "Right",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f843a595-83d4-40bc-b016-e69450fa766b",
+                    "path": "<Keyboard>/r",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Reset",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "b305808c-cf26-4950-adf7-c478a9e194d0",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Menu",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
