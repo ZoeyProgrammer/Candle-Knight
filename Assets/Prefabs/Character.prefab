@@ -32,6 +32,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4025754689605664029}
+  - {fileID: 4584209038269531533}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -110,6 +111,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Character_Knight_02_Black
       objectReference: {fileID: 0}
+    - target: {fileID: 185848, guid: f9d38fed7b251cb4f9546516bfaa11c3, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 452642, guid: f9d38fed7b251cb4f9546516bfaa11c3, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -176,4 +181,66 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 452642, guid: f9d38fed7b251cb4f9546516bfaa11c3, type: 3}
   m_PrefabInstance: {fileID: 4025754689605211455}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &4041092983746830950
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 1972260876814795080}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: f40a475cbee841f4eb93dcb7ded796b6, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f40a475cbee841f4eb93dcb7ded796b6, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f40a475cbee841f4eb93dcb7ded796b6, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f40a475cbee841f4eb93dcb7ded796b6, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f40a475cbee841f4eb93dcb7ded796b6, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f40a475cbee841f4eb93dcb7ded796b6, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f40a475cbee841f4eb93dcb7ded796b6, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f40a475cbee841f4eb93dcb7ded796b6, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f40a475cbee841f4eb93dcb7ded796b6, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f40a475cbee841f4eb93dcb7ded796b6, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f40a475cbee841f4eb93dcb7ded796b6, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: f40a475cbee841f4eb93dcb7ded796b6, type: 3}
+      propertyPath: m_Name
+      value: Candle_Knight(1)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: f40a475cbee841f4eb93dcb7ded796b6, type: 3}
+--- !u!4 &4584209038269531533 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: f40a475cbee841f4eb93dcb7ded796b6, type: 3}
+  m_PrefabInstance: {fileID: 4041092983746830950}
   m_PrefabAsset: {fileID: 0}
