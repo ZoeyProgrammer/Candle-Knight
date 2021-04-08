@@ -707,6 +707,52 @@ public class @InputMaster : IInputActionCollection, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""Debug"",
+            ""id"": ""756d15bd-b8db-4bf3-b08d-e17e6eecf486"",
+            ""actions"": [
+                {
+                    ""name"": ""ToggleDebug"",
+                    ""type"": ""Button"",
+                    ""id"": ""c778ed08-29c2-4ede-b852-40bb76233715"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Tabulate"",
+                    ""type"": ""Button"",
+                    ""id"": ""4156a2c3-e053-4b85-9cf2-26a06605b422"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""f42e236b-937c-4ed8-a2b0-d851d7d1e171"",
+                    ""path"": ""<Keyboard>/#(ZIRKUMFLEX)"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ToggleDebug"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""68fc46ab-c589-4c18-8475-a98fc9026d13"",
+                    ""path"": ""<Keyboard>/tab"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Tabulate"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -792,6 +838,10 @@ public class @InputMaster : IInputActionCollection, IDisposable
         m_UI_RightClick = m_UI.FindAction("RightClick", throwIfNotFound: true);
         m_UI_TrackedDevicePosition = m_UI.FindAction("TrackedDevicePosition", throwIfNotFound: true);
         m_UI_TrackedDeviceOrientation = m_UI.FindAction("TrackedDeviceOrientation", throwIfNotFound: true);
+        // Debug
+        m_Debug = asset.FindActionMap("Debug", throwIfNotFound: true);
+        m_Debug_ToggleDebug = m_Debug.FindAction("ToggleDebug", throwIfNotFound: true);
+        m_Debug_Tabulate = m_Debug.FindAction("Tabulate", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -1015,6 +1065,47 @@ public class @InputMaster : IInputActionCollection, IDisposable
         }
     }
     public UIActions @UI => new UIActions(this);
+
+    // Debug
+    private readonly InputActionMap m_Debug;
+    private IDebugActions m_DebugActionsCallbackInterface;
+    private readonly InputAction m_Debug_ToggleDebug;
+    private readonly InputAction m_Debug_Tabulate;
+    public struct DebugActions
+    {
+        private @InputMaster m_Wrapper;
+        public DebugActions(@InputMaster wrapper) { m_Wrapper = wrapper; }
+        public InputAction @ToggleDebug => m_Wrapper.m_Debug_ToggleDebug;
+        public InputAction @Tabulate => m_Wrapper.m_Debug_Tabulate;
+        public InputActionMap Get() { return m_Wrapper.m_Debug; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(DebugActions set) { return set.Get(); }
+        public void SetCallbacks(IDebugActions instance)
+        {
+            if (m_Wrapper.m_DebugActionsCallbackInterface != null)
+            {
+                @ToggleDebug.started -= m_Wrapper.m_DebugActionsCallbackInterface.OnToggleDebug;
+                @ToggleDebug.performed -= m_Wrapper.m_DebugActionsCallbackInterface.OnToggleDebug;
+                @ToggleDebug.canceled -= m_Wrapper.m_DebugActionsCallbackInterface.OnToggleDebug;
+                @Tabulate.started -= m_Wrapper.m_DebugActionsCallbackInterface.OnTabulate;
+                @Tabulate.performed -= m_Wrapper.m_DebugActionsCallbackInterface.OnTabulate;
+                @Tabulate.canceled -= m_Wrapper.m_DebugActionsCallbackInterface.OnTabulate;
+            }
+            m_Wrapper.m_DebugActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @ToggleDebug.started += instance.OnToggleDebug;
+                @ToggleDebug.performed += instance.OnToggleDebug;
+                @ToggleDebug.canceled += instance.OnToggleDebug;
+                @Tabulate.started += instance.OnTabulate;
+                @Tabulate.performed += instance.OnTabulate;
+                @Tabulate.canceled += instance.OnTabulate;
+            }
+        }
+    }
+    public DebugActions @Debug => new DebugActions(this);
     private int m_KeyboardMouseSchemeIndex = -1;
     public InputControlScheme KeyboardMouseScheme
     {
@@ -1081,5 +1172,10 @@ public class @InputMaster : IInputActionCollection, IDisposable
         void OnRightClick(InputAction.CallbackContext context);
         void OnTrackedDevicePosition(InputAction.CallbackContext context);
         void OnTrackedDeviceOrientation(InputAction.CallbackContext context);
+    }
+    public interface IDebugActions
+    {
+        void OnToggleDebug(InputAction.CallbackContext context);
+        void OnTabulate(InputAction.CallbackContext context);
     }
 }

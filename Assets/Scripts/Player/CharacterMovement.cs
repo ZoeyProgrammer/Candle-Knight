@@ -9,7 +9,7 @@ public class CharacterMovement : MonoBehaviour
 	[SerializeField] private LayerMask layerMask;
 
 	private InputMaster inputMaster = null;
-	private bool isAllowedToMove = true;
+	public bool isAllowedToMove = true;
 
 	private Vector2 controllerPos = Vector2.zero;
 
@@ -38,7 +38,8 @@ public class CharacterMovement : MonoBehaviour
 		RaycastHit hit;
 		if (!Physics.Raycast(transform.position + Vector3.up * 0.5f, Vector3.forward, out hit, 1, layerMask))
 		{
-			this.gameObject.transform.position += Vector3.forward;
+			if (isAllowedToMove)
+				this.gameObject.transform.position += Vector3.forward;
 		}
 		else if(hit.collider.gameObject.GetComponent<Box>() != null)
 		{
@@ -51,7 +52,8 @@ public class CharacterMovement : MonoBehaviour
 		RaycastHit hit;
 		if (!Physics.Raycast(transform.position + Vector3.up * 0.5f, -Vector3.forward, out hit, 1, layerMask))
 		{
-			this.gameObject.transform.position -= Vector3.forward;
+			if (isAllowedToMove)
+				this.gameObject.transform.position -= Vector3.forward;
 		}
 		else if (hit.collider.gameObject.GetComponent<Box>() != null)
 		{
@@ -64,7 +66,8 @@ public class CharacterMovement : MonoBehaviour
 		RaycastHit hit;
 		if (!Physics.Raycast(transform.position + Vector3.up * 0.5f, Vector3.right, out hit, 1, layerMask))
 		{
-			this.gameObject.transform.position += Vector3.right;
+			if (isAllowedToMove)
+				this.gameObject.transform.position += Vector3.right;
 		}
 		else if (hit.collider.gameObject.GetComponent<Box>() != null)
 		{
@@ -77,7 +80,8 @@ public class CharacterMovement : MonoBehaviour
 		RaycastHit hit;
 		if (!Physics.Raycast(transform.position + Vector3.up * 0.5f, -Vector3.right, out hit, 1, layerMask))
 		{
-			this.gameObject.transform.position -= Vector3.right;
+			if (isAllowedToMove)
+				this.gameObject.transform.position -= Vector3.right;
 		}
 		else if (hit.collider.gameObject.GetComponent<Box>() != null)
 		{
