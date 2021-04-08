@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class Button : MonoBehaviour
 {
-    public UnityEngine.Events.UnityEvent OnPress;
-    public UnityEngine.Events.UnityEvent OnRemoved;
+	[SerializeField] bool allowBoxes = true;
 
+	public UnityEngine.Events.UnityEvent OnPress;
+    public UnityEngine.Events.UnityEvent OnRemoved;
 
     // Update is called once per frame
     void Update()
@@ -16,7 +17,7 @@ public class Button : MonoBehaviour
 
 	private void OnTriggerEnter(Collider other)
 	{
-		if (other.tag == "Box" || other.tag == "Player")
+		if (other.tag == "Player" || (allowBoxes && other.tag == "Box" ))
 		{
 			OnPress.Invoke();
 		}
@@ -24,7 +25,7 @@ public class Button : MonoBehaviour
 
 	private void OnTriggerExit(Collider other)
 	{
-		if (other.tag == "Box" || other.tag == "Player")
+		if (other.tag == "Player" || (allowBoxes && other.tag == "Box"))
 		{
 			OnRemoved.Invoke();
 		}
