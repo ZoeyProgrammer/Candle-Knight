@@ -11,6 +11,8 @@ public class EnemySight : MonoBehaviour
     [SerializeField] float onTime = 1f;
     [SerializeField] float offTime = 1f;
 
+    private LineRenderer laser = null;
+
     public UnityEngine.Events.UnityEvent OnDetection;
 
     private bool currentState = false;
@@ -24,6 +26,9 @@ public class EnemySight : MonoBehaviour
             timer = onTime;
         else
             timer = offTime;
+
+        laser = GetComponent<LineRenderer>();
+        laser.SetPosition(0, transform.position + Vector3.up * 0.5f);
     }
 
     // Update is called once per frame
@@ -46,13 +51,27 @@ public class EnemySight : MonoBehaviour
         }
 
         //Player Detection - Need to change this up so it only detects the player once until he gets back out again
-        RaycastHit hit;
-        if (currentState && Physics.Raycast(transform.position + Vector3.up * 0.5f, this.transform.forward, out hit, viewDistance, layerMask))
+        if (currentState)
         {
-            if (hit.collider.gameObject.tag == "Player")
-            {
-                OnDetection.Invoke();
+            RaycastHit hit;
+            if (Physics.Raycast(transform.position + Vector3.up * 0.5f, this.transform.forward, out hit, viewDistance, layerMask))
+			{
+                laser.SetPosition(1, hit.point);
+                if (hit.collider.gameObject.tag == "Player")
+                {
+                    OnDetection.Invoke();
+                }
             }
+            else
+			{
+                laser.SetPosition(1, (transform.position + Vector3.up * 0.5f) + transform.forward * viewDistance);
+            }
+
+            laser.enabled = true;
         }
+        else
+		{
+            laser.enabled = false;
+		}
     }
 }
