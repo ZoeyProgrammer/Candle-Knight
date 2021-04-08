@@ -35,33 +35,53 @@ public class CharacterMovement : MonoBehaviour
 
 	void Forwards(InputAction.CallbackContext context)
 	{
-		if (!Physics.Raycast(transform.position + Vector3.up, Vector3.forward, 1, layerMask))
+		RaycastHit hit;
+		if (!Physics.Raycast(transform.position + Vector3.up * 0.5f, Vector3.forward, out hit, 1, layerMask))
 		{
 			this.gameObject.transform.position += Vector3.forward;
+		}
+		else if(hit.collider.gameObject.GetComponent<Box>() != null)
+		{
+			hit.collider.gameObject.GetComponent<Box>().Push(Vector3.forward);
 		}
 	}
 
 	void Backwards(InputAction.CallbackContext context)
 	{
-		if (!Physics.Raycast(transform.position + Vector3.up, -Vector3.forward, 1, layerMask))
+		RaycastHit hit;
+		if (!Physics.Raycast(transform.position + Vector3.up * 0.5f, -Vector3.forward, out hit, 1, layerMask))
 		{
 			this.gameObject.transform.position -= Vector3.forward;
+		}
+		else if (hit.collider.gameObject.GetComponent<Box>() != null)
+		{
+			hit.collider.gameObject.GetComponent<Box>().Push(-Vector3.forward);
 		}
 	}
 
 	void Right(InputAction.CallbackContext context)
 	{
-		if (!Physics.Raycast(transform.position + Vector3.up, Vector3.right, 1, layerMask))
+		RaycastHit hit;
+		if (!Physics.Raycast(transform.position + Vector3.up * 0.5f, Vector3.right, out hit, 1, layerMask))
 		{
 			this.gameObject.transform.position += Vector3.right;
+		}
+		else if (hit.collider.gameObject.GetComponent<Box>() != null)
+		{
+			hit.collider.gameObject.GetComponent<Box>().Push(Vector3.right);
 		}
 	}	
 
 	void Left(InputAction.CallbackContext context)
 	{
-		if (!Physics.Raycast(transform.position + Vector3.up, -Vector3.right, 1, layerMask))
+		RaycastHit hit;
+		if (!Physics.Raycast(transform.position + Vector3.up * 0.5f, -Vector3.right, out hit, 1, layerMask))
 		{
 			this.gameObject.transform.position -= Vector3.right;
+		}
+		else if (hit.collider.gameObject.GetComponent<Box>() != null)
+		{
+			hit.collider.gameObject.GetComponent<Box>().Push(-Vector3.right);
 		}
 	}
 }

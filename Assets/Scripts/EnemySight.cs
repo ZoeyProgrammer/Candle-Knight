@@ -47,7 +47,7 @@ public class EnemySight : MonoBehaviour
 
         //Player Detection - Need to change this up so it only detects the player once until he gets back out again
         RaycastHit hit;
-        if (currentState && Physics.Raycast(transform.position + Vector3.up, this.transform.forward, out hit, viewDistance, layerMask))
+        if (currentState && Physics.Raycast(transform.position + Vector3.up * 0.5f, this.transform.forward, out hit, viewDistance, layerMask))
         {
             if (hit.collider.gameObject.tag == "Player")
             {
