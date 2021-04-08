@@ -9,7 +9,8 @@ public class Box : MonoBehaviour
 
 	public void Push(Vector3 direction)
 	{
-		if (!Physics.Raycast(transform.position + Vector3.up, direction, 1, layerMask))
+		Debug.DrawRay(transform.position, direction, Color.red, 1f);
+		if (!Physics.Raycast(transform.position, direction, 1, layerMask))
 		{
 			this.gameObject.transform.position += direction;
 		}
