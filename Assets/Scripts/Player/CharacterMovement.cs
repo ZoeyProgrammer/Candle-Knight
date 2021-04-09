@@ -21,6 +21,8 @@ public class CharacterMovement : MonoBehaviour
 		inputMaster.Player.Backwards.performed += Backwards;
 		inputMaster.Player.Right.performed += Right;
 		inputMaster.Player.Left.performed += Left;
+		inputMaster.Player.TurnLeft.performed += TurnLeft;
+		inputMaster.Player.TurnRight.performed += TurnLeft;
 	}
 
 	private void OnEnable()
@@ -41,7 +43,7 @@ public class CharacterMovement : MonoBehaviour
 			if (isAllowedToMove)
 				this.gameObject.transform.position += Vector3.forward;
 		}
-		else if(hit.collider.gameObject.GetComponent<Box>() != null)
+		else if (hit.collider.gameObject.GetComponent<Box>() != null)
 		{
 			hit.collider.gameObject.GetComponent<Box>().Push(Vector3.forward);
 		}
@@ -73,7 +75,7 @@ public class CharacterMovement : MonoBehaviour
 		{
 			hit.collider.gameObject.GetComponent<Box>().Push(Vector3.right);
 		}
-	}	
+	}
 
 	void Left(InputAction.CallbackContext context)
 	{
@@ -87,5 +89,15 @@ public class CharacterMovement : MonoBehaviour
 		{
 			hit.collider.gameObject.GetComponent<Box>().Push(-Vector3.right);
 		}
+	}
+
+	void TurnLeft(InputAction.CallbackContext context)
+	{
+		this.transform.rotation = Quaternion.Euler(this.transform.rotation.x,this.transform.rotation.y +90,this.transform.rotation.z);
+	}
+
+	void TurnRight(InputAction.CallbackContext context)
+	{
+		this.transform.rotation = Quaternion.Euler(this.transform.rotation.x, this.transform.rotation.y -90, this.transform.rotation.z);
 	}
 }
