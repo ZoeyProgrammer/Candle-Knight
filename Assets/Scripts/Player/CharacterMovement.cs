@@ -93,11 +93,11 @@ public class CharacterMovement : MonoBehaviour
 
 	void TurnLeft(InputAction.CallbackContext context)
 	{
-		this.transform.rotation = Quaternion.Euler(this.transform.rotation.x,this.transform.rotation.y +90,this.transform.rotation.z);
+		//this.transform.rotation = Quaternion.Euler(this.transform.rotation.x,this.transform.rotation.y +90,this.transform.rotation.z);
 	}
 
 	void TurnRight(InputAction.CallbackContext context)
 	{
-		this.transform.rotation = Quaternion.Euler(this.transform.rotation.x, this.transform.rotation.y -90, this.transform.rotation.z);
+		//this.transform.rotation = Quaternion.Euler(this.transform.rotation.x, this.transform.rotation.y -90, this.transform.rotation.z);
 	}
 }
