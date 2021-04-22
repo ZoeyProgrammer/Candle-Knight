@@ -829,6 +829,33 @@ public class @InputMaster : IInputActionCollection, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""Editor"",
+            ""id"": ""939cc9b1-fc9a-469d-bbfc-3834f0c31b6a"",
+            ""actions"": [
+                {
+                    ""name"": ""Place"",
+                    ""type"": ""Button"",
+                    ""id"": ""d03d331f-7b77-4d76-90c5-e027994b3ffe"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""1f08bcbb-8155-4dfe-b59c-cb37394c30f3"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Place"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -922,6 +949,9 @@ public class @InputMaster : IInputActionCollection, IDisposable
         m_Debug = asset.FindActionMap("Debug", throwIfNotFound: true);
         m_Debug_ToggleDebug = m_Debug.FindAction("ToggleDebug", throwIfNotFound: true);
         m_Debug_Tabulate = m_Debug.FindAction("Tabulate", throwIfNotFound: true);
+        // Editor
+        m_Editor = asset.FindActionMap("Editor", throwIfNotFound: true);
+        m_Editor_Place = m_Editor.FindAction("Place", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -1218,6 +1248,39 @@ public class @InputMaster : IInputActionCollection, IDisposable
         }
     }
     public DebugActions @Debug => new DebugActions(this);
+
+    // Editor
+    private readonly InputActionMap m_Editor;
+    private IEditorActions m_EditorActionsCallbackInterface;
+    private readonly InputAction m_Editor_Place;
+    public struct EditorActions
+    {
+        private @InputMaster m_Wrapper;
+        public EditorActions(@InputMaster wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Place => m_Wrapper.m_Editor_Place;
+        public InputActionMap Get() { return m_Wrapper.m_Editor; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(EditorActions set) { return set.Get(); }
+        public void SetCallbacks(IEditorActions instance)
+        {
+            if (m_Wrapper.m_EditorActionsCallbackInterface != null)
+            {
+                @Place.started -= m_Wrapper.m_EditorActionsCallbackInterface.OnPlace;
+                @Place.performed -= m_Wrapper.m_EditorActionsCallbackInterface.OnPlace;
+                @Place.canceled -= m_Wrapper.m_EditorActionsCallbackInterface.OnPlace;
+            }
+            m_Wrapper.m_EditorActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @Place.started += instance.OnPlace;
+                @Place.performed += instance.OnPlace;
+                @Place.canceled += instance.OnPlace;
+            }
+        }
+    }
+    public EditorActions @Editor => new EditorActions(this);
     private int m_KeyboardMouseSchemeIndex = -1;
     public InputControlScheme KeyboardMouseScheme
     {
@@ -1293,5 +1356,9 @@ public class @InputMaster : IInputActionCollection, IDisposable
     {
         void OnToggleDebug(InputAction.CallbackContext context);
         void OnTabulate(InputAction.CallbackContext context);
+    }
+    public interface IEditorActions
+    {
+        void OnPlace(InputAction.CallbackContext context);
     }
 }
