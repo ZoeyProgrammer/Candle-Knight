@@ -841,6 +841,14 @@ public class @InputMaster : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Remove"",
+                    ""type"": ""Button"",
+                    ""id"": ""9f387b79-2ee2-4370-afd5-5612a65cc18c"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -850,8 +858,19 @@ public class @InputMaster : IInputActionCollection, IDisposable
                     ""path"": ""<Mouse>/leftButton"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Keyboard&Mouse"",
                     ""action"": ""Place"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a42a1f02-b801-4e31-b705-f29700df106e"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Remove"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -952,6 +971,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
         // Editor
         m_Editor = asset.FindActionMap("Editor", throwIfNotFound: true);
         m_Editor_Place = m_Editor.FindAction("Place", throwIfNotFound: true);
+        m_Editor_Remove = m_Editor.FindAction("Remove", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -1253,11 +1273,13 @@ public class @InputMaster : IInputActionCollection, IDisposable
     private readonly InputActionMap m_Editor;
     private IEditorActions m_EditorActionsCallbackInterface;
     private readonly InputAction m_Editor_Place;
+    private readonly InputAction m_Editor_Remove;
     public struct EditorActions
     {
         private @InputMaster m_Wrapper;
         public EditorActions(@InputMaster wrapper) { m_Wrapper = wrapper; }
         public InputAction @Place => m_Wrapper.m_Editor_Place;
+        public InputAction @Remove => m_Wrapper.m_Editor_Remove;
         public InputActionMap Get() { return m_Wrapper.m_Editor; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1270,6 +1292,9 @@ public class @InputMaster : IInputActionCollection, IDisposable
                 @Place.started -= m_Wrapper.m_EditorActionsCallbackInterface.OnPlace;
                 @Place.performed -= m_Wrapper.m_EditorActionsCallbackInterface.OnPlace;
                 @Place.canceled -= m_Wrapper.m_EditorActionsCallbackInterface.OnPlace;
+                @Remove.started -= m_Wrapper.m_EditorActionsCallbackInterface.OnRemove;
+                @Remove.performed -= m_Wrapper.m_EditorActionsCallbackInterface.OnRemove;
+                @Remove.canceled -= m_Wrapper.m_EditorActionsCallbackInterface.OnRemove;
             }
             m_Wrapper.m_EditorActionsCallbackInterface = instance;
             if (instance != null)
@@ -1277,6 +1302,9 @@ public class @InputMaster : IInputActionCollection, IDisposable
                 @Place.started += instance.OnPlace;
                 @Place.performed += instance.OnPlace;
                 @Place.canceled += instance.OnPlace;
+                @Remove.started += instance.OnRemove;
+                @Remove.performed += instance.OnRemove;
+                @Remove.canceled += instance.OnRemove;
             }
         }
     }
@@ -1360,5 +1388,6 @@ public class @InputMaster : IInputActionCollection, IDisposable
     public interface IEditorActions
     {
         void OnPlace(InputAction.CallbackContext context);
+        void OnRemove(InputAction.CallbackContext context);
     }
 }
