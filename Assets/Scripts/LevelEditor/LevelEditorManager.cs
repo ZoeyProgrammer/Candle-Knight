@@ -49,6 +49,16 @@ public class LevelEditorManager : MonoBehaviour
 		
 	}
 
+	public void SaveLevel() //For the Button
+	{
+		Savesystem.SaveLevel("test");
+	}
+
+	public void LoadLevel() //For the Button
+	{
+		Savesystem.LoadLevel("test");
+	}
+
 	private void PlaceObject(InputAction.CallbackContext context)
 	{
 		if (CheckGrid(currentObject) == null)

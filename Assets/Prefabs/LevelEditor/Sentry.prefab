@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 1537361329305830067}
   - component: {fileID: 5839474214950378659}
   m_Layer: 0
-  m_Name: Test4
-  m_TagString: Untagged
+  m_Name: Sentry
+  m_TagString: Sentry
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

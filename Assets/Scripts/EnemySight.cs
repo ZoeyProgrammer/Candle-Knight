@@ -6,10 +6,10 @@ public class EnemySight : MonoBehaviour
 {
     [Tooltip("The Layers which Interrupt the Beam including Player")]
     [SerializeField] private LayerMask layerMask;
-    [SerializeField] bool startState = true;
-    [SerializeField] int viewDistance = 5;
-    [SerializeField] float onTime = 1f;
-    [SerializeField] float offTime = 1f;
+    [SerializeField] public bool startState = true;
+    [SerializeField] public int viewDistance = 5;
+    [SerializeField] public float onTime = 1f;
+    [SerializeField] public float offTime = 1f;
 
     private LineRenderer laser = null;
 
