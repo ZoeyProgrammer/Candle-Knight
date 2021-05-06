@@ -111,8 +111,6 @@ public static class Savesystem
 				Debug.LogWarning("The requested variant does not exist in the template - defaulting to Variant 0");
 				wall.variant = 0;
 			}
-
-			GameObject.Instantiate(template.wall[wall.variant], new Vector3(wall.position[0], 0, wall.position[1]), Quaternion.identity, parent.transform);
 		}
 
 		//TODO Fo Sentrys etc. as well

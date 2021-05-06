@@ -5,13 +5,13 @@ using UnityEngine.InputSystem;
 
 public class LevelEditorManager : MonoBehaviour
 {
-	[SerializeField] GameObject parentObject;
-	[SerializeField] GameObject testObject;
-	[SerializeField] LineRenderer crosshair;
-	[SerializeField] ObjectTemplate template;
+	[SerializeField] GameObject testObject = null;
+	[SerializeField] LineRenderer crosshair = null;
+	[SerializeField] ObjectTemplate template = null;
 
 	private InputMaster inputMaster = null;
 	private GameObject currentObject = null;
+	private GameObject parentObject = null;
 
 	void Awake()
 	{
@@ -20,6 +20,8 @@ public class LevelEditorManager : MonoBehaviour
 		inputMaster.Editor.Place.performed += PlaceObject;
 		inputMaster.Editor.Remove.performed += RemoveObject;
 
+		parentObject = GameObject.FindGameObjectWithTag("Parent");
+		
 		//DEBUG
 		currentObject = testObject;
 	}
