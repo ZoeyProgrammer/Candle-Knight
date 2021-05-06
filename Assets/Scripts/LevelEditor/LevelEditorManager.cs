@@ -8,6 +8,7 @@ public class LevelEditorManager : MonoBehaviour
 	[SerializeField] GameObject parentObject;
 	[SerializeField] GameObject testObject;
 	[SerializeField] LineRenderer crosshair;
+	[SerializeField] ObjectTemplate template;
 
 	private InputMaster inputMaster = null;
 	private GameObject currentObject = null;
@@ -56,7 +57,7 @@ public class LevelEditorManager : MonoBehaviour
 
 	public void LoadLevel() //For the Button
 	{
-		Savesystem.LoadLevel("test");
+		Savesystem.LoadLevel("test", template);
 	}
 
 	private void PlaceObject(InputAction.CallbackContext context)

@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Wall
   - Sentry
+  - Box
+  - Parent
   layers:
   - Default
   - TransparentFX

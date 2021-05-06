@@ -14,11 +14,12 @@ public static class Savesystem
 		SaveToFile(levelData);
 	}
 
-	public static void LoadLevel(string levelName)
+	public static void LoadLevel(string levelName, ObjectTemplate template)
 	{
 		LevelData levelData = LoadFromFile(levelName);
 		//TODO: Ask User if he is sure here maybe -> Errorcheck the current Version vs. File Version
-		BuildLevel(levelData);
+		ClearLevel();
+		BuildLevel(levelData, template);
 	}
 	//Till here
 
@@ -78,20 +79,40 @@ public static class Savesystem
 		return new LevelData(levelName, walls, sentrys);
 	}
 
-	private static void BuildLevel(LevelData level)
+	private static void ClearLevel()
 	{
+		GameObject parent = GameObject.FindGameObjectWithTag("Parent");
+		int childCount = parent.transform.childCount;
+		for (int i = 0; i < childCount; i++)
+		{
+			GameObject.Destroy(parent.transform.GetChild(i).gameObject);
+		}
+	}
+
+	private static void BuildLevel(LevelData level, ObjectTemplate template)
+	{
+		if (template == null)
+		{
+			Debug.LogError("No Template file found for building the Level");
+			return;
+		}
+
+		GameObject parent = GameObject.FindGameObjectWithTag("Parent");
+
 		//Walls
 		foreach (Wall wall in level.walls)
 		{
-			//TODO:
+			if (wall.variant < template.wall.Length)
+			{
+				GameObject.Instantiate(template.wall[wall.variant], new Vector3(wall.position[0], 0, wall.position[1]), Quaternion.identity, parent.transform);
+			}
+			else
+			{
+				Debug.LogWarning("The requested variant does not exist in the template - defaulting to Variant 0");
+				wall.variant = 0;
+			}
 
-			//If case variant exists
-			//Instantiate file.wall[variant]
-
-			//That Template file would be similar to last semester Enemy Patrol Path Save thing
-			//Multiple ones, easy to switch out
-			//Arrays for Variants
-			Debug.Log("X:" + wall.position[0] + " Z:" + wall.position[1]);
+			GameObject.Instantiate(template.wall[wall.variant], new Vector3(wall.position[0], 0, wall.position[1]), Quaternion.identity, parent.transform);
 		}
 
 		//TODO Fo Sentrys etc. as well
