@@ -21,7 +21,17 @@ public static class Savesystem
 		ClearLevel();
 		BuildLevel(levelData, template);
 	}
+
 	//Till here
+	public static void ClearLevel()
+	{
+		GameObject parent = GameObject.FindGameObjectWithTag("Parent");
+		int childCount = parent.transform.childCount;
+		for (int i = 0; i < childCount; i++)
+		{
+			GameObject.Destroy(parent.transform.GetChild(i).gameObject);
+		}
+	}
 
 	private static void SaveToFile(LevelData level)
 	{
@@ -77,16 +87,6 @@ public static class Savesystem
 		}
 
 		return new LevelData(levelName, walls, sentrys);
-	}
-
-	private static void ClearLevel()
-	{
-		GameObject parent = GameObject.FindGameObjectWithTag("Parent");
-		int childCount = parent.transform.childCount;
-		for (int i = 0; i < childCount; i++)
-		{
-			GameObject.Destroy(parent.transform.GetChild(i).gameObject);
-		}
 	}
 
 	private static void BuildLevel(LevelData level, ObjectTemplate template)

@@ -2,15 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class LevelEditorManager : MonoBehaviour
 {
-	[SerializeField] GameObject testObject = null;
 	[SerializeField] LineRenderer crosshair = null;
+
+	public ObjectTemplate Template { get => this.template; }
 	[SerializeField] ObjectTemplate template = null;
 
-	private InputMaster inputMaster = null;
+	public GameObject CurrentObject { get => this.currentObject; set => this.currentObject = value; }
 	private GameObject currentObject = null;
+
+	private InputMaster inputMaster = null;
 	private GameObject parentObject = null;
 
 	void Awake()
@@ -23,7 +27,7 @@ public class LevelEditorManager : MonoBehaviour
 		parentObject = GameObject.FindGameObjectWithTag("Parent");
 		
 		//DEBUG
-		currentObject = testObject;
+		currentObject = template.Contains()[0][0];
 	}
 
 	private void OnEnable()
@@ -49,17 +53,6 @@ public class LevelEditorManager : MonoBehaviour
 			crosshair.endColor = Color.red;
 			crosshair.startColor = Color.red;
 		}
-		
-	}
-
-	public void SaveLevel() //For the Button
-	{
-		Savesystem.SaveLevel("test");
-	}
-
-	public void LoadLevel() //For the Button
-	{
-		Savesystem.LoadLevel("test", template);
 	}
 
 	private void PlaceObject(InputAction.CallbackContext context)
