@@ -6,12 +6,14 @@ using UnityEngine.UI;
 public class EditorUIManager : MonoBehaviour
 {
     [SerializeField] private Dropdown objectSelection = null;
-    [SerializeField] private SliderInput variantSelection = null;
-
+    [SerializeField] private SliderInput variantSelection, rotationSelection = null;
+    [SerializeField] private InputField inputX, inputZ = null;
+    
     private ObjectTemplate template = null;
     private LevelEditorManager manage = null;
     private int currentObject = 0;
     private int currentVariant = 0;
+    private int currentRotation = 0;
 
 	private void Awake()
 	{
@@ -74,8 +76,78 @@ public class EditorUIManager : MonoBehaviour
 		}
 	}
 
+    public void SelectRotation(int option)
+    {
+        currentRotation = IntToRot(option);
+        PushCurrentRotation();
+    }
+
+    public void ChangeRotation(int option)
+	{
+        manage.RotateObject(IntToRot(option));
+    }
+
+    private int IntToRot(int option)
+	{
+        switch (option)
+        {
+            case 0:
+                return 0;
+            case 1:
+                return 90;
+            case 2:
+                return 180;
+            case 3:
+                return 270;
+            default:
+                return 0;
+        }
+    }
+
+    private int RotToInt(int degree)
+    {
+        switch (degree)
+        {
+            case 0:
+                return 0;
+            case 90:
+                return 1;
+            case 180:
+                return 2;
+            case 270:
+                return 3;
+            default:
+                return 0;
+        }
+    }
+
     private void PushCurrentObject()
 	{
         manage.CurrentObject = template.Contains()[currentObject][currentVariant];
 	}
+
+    private void PushCurrentRotation()
+	{
+        manage.CurrentRotation = Quaternion.Euler(0, currentRotation, 0);
+    }
+
+	private void Update()
+	{
+        //Only do the update if the selected Object has changed and its not null
+
+		if (manage.SelectedObject != null)
+		{
+            UpdateInspector();
+		}
+	}
+
+	private void UpdateInspector()
+	{
+        inputX.text = manage.SelectedObject.transform.position.x.ToString();
+        inputZ.text = manage.SelectedObject.transform.position.z.ToString();
+
+        rotationSelection.Value = RotToInt((int)manage.SelectedObject.transform.rotation.eulerAngles.y);
+    }
+
+
 }

@@ -9,15 +9,23 @@ public class SliderInput : MonoBehaviour
     [SerializeField] InputField input = null;
 
     public int MinValue { get => this.minValue; set => SetMin(value); }
-    private int minValue = 0;
+    [SerializeField] private int minValue = 0;
     public int MaxValue { get => this.maxValue; set => SetMax(value); }
-    private int maxValue = 1;
-    public int Value { get => this.minValue; }
-    private int currentValue = 0;
+    [SerializeField] private int maxValue = 1;
+    public int Value { get => this.currentValue; set => SetValue(value); }
+    [SerializeField] private int currentValue = 0;
 
     public UnityEngine.Events.UnityEvent<int> OnUpdate;
 
-    private void SetMax(int value)
+	private void Awake()
+	{
+        slider.minValue = minValue;
+        slider.maxValue = maxValue;
+        slider.value = currentValue;
+        input.text = currentValue.ToString();
+	}
+
+	private void SetMax(int value)
 	{
         slider.maxValue = value;
         maxValue = value;
@@ -28,6 +36,13 @@ public class SliderInput : MonoBehaviour
         slider.minValue = value;
         minValue = value;
     }
+
+    private void SetValue(int value)
+	{
+        currentValue = value;
+        input.text = value.ToString();
+        slider.value = value;
+	}
 
     public void UpdateNull()
 	{

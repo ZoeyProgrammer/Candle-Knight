@@ -6,13 +6,20 @@ using UnityEngine.UI;
 
 public class LevelEditorManager : MonoBehaviour
 {
-	[SerializeField] LineRenderer crosshair = null;
+	[SerializeField] LineRenderer cursorCrosshair = null;
+	[SerializeField] LineRenderer selectionCrosshair = null;
 
 	public ObjectTemplate Template { get => this.template; }
 	[SerializeField] ObjectTemplate template = null;
 
 	public GameObject CurrentObject { get => this.currentObject; set => this.currentObject = value; }
 	private GameObject currentObject = null;
+
+	public Quaternion CurrentRotation { get => this.currentRotation; set => this.currentRotation = value; }
+	private Quaternion currentRotation = Quaternion.identity;
+
+	public GameObject SelectedObject { get => this.selectedObject; } //Potentially need a different Set function?
+	private GameObject selectedObject = null;
 
 	private InputMaster inputMaster = null;
 	private GameObject parentObject = null;
@@ -21,8 +28,8 @@ public class LevelEditorManager : MonoBehaviour
 	{
 		inputMaster = new InputMaster();
 
-		inputMaster.Editor.Place.performed += PlaceObject;
-		inputMaster.Editor.Remove.performed += RemoveObject;
+		inputMaster.Editor.Place.performed += OnLeftclick;
+		inputMaster.Editor.Remove.performed += OnRightclick;
 
 		parentObject = GameObject.FindGameObjectWithTag("Parent");
 		
@@ -42,32 +49,65 @@ public class LevelEditorManager : MonoBehaviour
 
 	private void Update()
 	{ //Potentially only check this whenever an actual grid-change occured?
-		crosshair.transform.position = CalcPos();
+		cursorCrosshair.transform.position = CalcPos();
 		if (CheckGrid(currentObject) == null)
 		{
-			crosshair.endColor = Color.green;
-			crosshair.startColor = Color.green;
+			cursorCrosshair.endColor = Color.green;
+			cursorCrosshair.startColor = Color.green;
 		}
 		else
 		{
-			crosshair.endColor = Color.red;
-			crosshair.startColor = Color.red;
+			cursorCrosshair.endColor = Color.red;
+			cursorCrosshair.startColor = Color.red;
 		}
 	}
 
-	private void PlaceObject(InputAction.CallbackContext context)
+	private void OnLeftclick(InputAction.CallbackContext context)
 	{
 		if (CheckGrid(currentObject) == null)
 		{
-			GameObject obj = Instantiate(currentObject, CalcPos(), Quaternion.identity, parentObject.transform);
-			Debug.Log("Object Placed successfully");
+			PlaceObject();
+		}
+		else
+		{
+			SelectObject();
 		}
 	}
 
-	private void RemoveObject(InputAction.CallbackContext context)
+	private void PlaceObject()
+	{
+		GameObject obj = Instantiate(currentObject, CalcPos(), currentRotation, parentObject.transform);
+		Debug.Log("Object Placed successfully");
+	}
+
+	private void SelectObject()
 	{
 		GameObject obj = CheckGrid(currentObject);
+		selectionCrosshair.enabled = true;
+		selectedObject = obj;
+		selectionCrosshair.transform.position = obj.transform.position;
+	}
+
+	private void OnRightclick(InputAction.CallbackContext context)
+	{
+		DestroyObject();
+	}
+
+	private void DestroyObject()
+	{
+		GameObject obj = CheckGrid(currentObject);
+		if (obj == selectedObject)
+		{
+			selectedObject = null;
+			selectionCrosshair.enabled = false;
+		}
 		GameObject.Destroy(obj);
+	}
+
+	public void RotateObject(int degrees)
+	{
+		if (selectedObject != null)
+		selectedObject.transform.rotation = Quaternion.Euler(0, degrees, 0);
 	}
 
 	private GameObject CheckGrid(GameObject obj)
