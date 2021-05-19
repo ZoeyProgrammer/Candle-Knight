@@ -93,6 +93,12 @@ public class LevelEditorManager : MonoBehaviour
 		selectionCrosshair.transform.position = obj.transform.position;
 	}
 
+	public void DeselectObject()
+	{
+		selectedObject = null;
+		selectionCrosshair.enabled = false;
+	}
+
 	private void OnRightclick(InputAction.CallbackContext context)
 	{
 		DestroyObject();

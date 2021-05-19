@@ -8,12 +8,17 @@ public class EditorUIManager : MonoBehaviour
     [SerializeField] private Dropdown objectSelection = null;
     [SerializeField] private SliderInput variantSelection, rotationSelection = null;
     [SerializeField] private InputField inputX, inputZ = null;
-    
+    [SerializeField] private Transform contextMenus = null;
+    [SerializeField] private GameObject sentryMenu = null;
+
     private ObjectTemplate template = null;
     private LevelEditorManager manage = null;
     private int currentObject = 0;
     private int currentVariant = 0;
     private int currentRotation = 0;
+    private GameObject selectedObject = null;
+
+    private GameObject currentContextMenu = null;
 
 	private void Awake()
 	{
@@ -46,6 +51,7 @@ public class EditorUIManager : MonoBehaviour
 
     public void ClearLevel() //For the Button
 	{
+        manage.DeselectObject();
         Savesystem.ClearLevel();
         //TODO: Maybe Question the Dumb Dumb User because he is Dumb? This is a good TODO text, becauase its bad if anyone sees this >.<
 	}
@@ -135,9 +141,10 @@ public class EditorUIManager : MonoBehaviour
 	{
         //Only do the update if the selected Object has changed and its not null
 
-		if (manage.SelectedObject != null)
+		if (manage.SelectedObject != null && manage.SelectedObject != selectedObject)
 		{
             UpdateInspector();
+            selectedObject = manage.SelectedObject;
 		}
 	}
 
@@ -151,8 +158,15 @@ public class EditorUIManager : MonoBehaviour
         /////////////////////////////////////////////////////
         ///ONE OF THE PLACES I NEED TO ADD NEW OBJECTS TO ///
         /////////////////////////////////////////////////////
-        
+
+        Destroy(currentContextMenu);
+        currentContextMenu = null;
+
         //Change the Inspector depending on what kind of Selected Object to show Object Specific Data
+        if (manage.SelectedObject.GetComponent<EnemySight>() != null)
+		{
+            currentContextMenu = Instantiate(sentryMenu, contextMenus);
+		}
     }
 
 
