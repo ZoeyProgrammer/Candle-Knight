@@ -53,7 +53,6 @@ public class SliderInput : MonoBehaviour
 
     public void SliderUpdate()
 	{
-        Debug.Log("Slider got Updated");
         if (slider.value <= maxValue && slider.value >= minValue)
 		{
             currentValue = (int)slider.value;
@@ -76,7 +75,6 @@ public class SliderInput : MonoBehaviour
 
     public void InputUpdate(string text)
 	{
-        Debug.Log("Input got Updated");
         int value = int.Parse(text);
         if (value <= maxValue && value >= minValue)
         {

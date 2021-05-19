@@ -24,18 +24,21 @@ public class LevelData
 [System.Serializable]
 public class Object
 {
+	public int variant = 0;
 	public float[] position = new float[2];
 }
 
 [System.Serializable]
 public class Wall : Object
 {
-	public int variant;
 	public Wall(GameObject wall)
 	{
-		variant = 0; //TODO: Actually implement having Variants
 		position[0] = wall.transform.position.x;
 		position[1] = wall.transform.position.z;
+
+		ObjectMarker data = wall.GetComponent<ObjectMarker>();
+		if (data != null)
+			variant = data.data.variant;
 	}
 }
 
@@ -47,13 +50,22 @@ public class Sentry : Object
 	float onTime;
 	float offTime;
 
-	public Sentry(EnemySight sentry)
+	public Sentry(GameObject sentry)
 	{
-		startState = sentry.startState;
-		viewDistance = sentry.viewDistance;
-		onTime = sentry.onTime;
-		offTime = sentry.offTime;
 		position[0] = sentry.transform.position.x;
 		position[1] = sentry.transform.position.z;
+
+		ObjectMarker data = sentry.GetComponent<ObjectMarker>();
+		if (data != null)
+			variant = data.data.variant;
+
+		EnemySight sight = sentry.GetComponent<EnemySight>();
+		if (sight != null)
+		{
+			startState = sight.startState;
+			viewDistance = sight.viewDistance;
+			onTime = sight.onTime;
+			offTime = sight.offTime;
+		}
 	}
 }

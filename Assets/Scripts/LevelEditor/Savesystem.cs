@@ -70,6 +70,11 @@ public static class Savesystem
 
 	private static LevelData GetLevelData(string levelName)
 	{
+		//Potentially Cut this down to just Pushing EVERYTHING into Leveldata
+		//and let the Leveldata handle the sorting of Objects?
+
+
+
 		//Walls
 		GameObject[] wallObj = GameObject.FindGameObjectsWithTag("Wall");
 		Wall[] walls = new Wall[wallObj.Length];
@@ -83,7 +88,7 @@ public static class Savesystem
 		Sentry[] sentrys = new Sentry[sentryObj.Length];
 		for (int i = 0; i < sentryObj.Length; i++)
 		{
-			sentrys[i] = new Sentry(sentryObj[i].GetComponent<EnemySight>());
+			sentrys[i] = new Sentry(sentryObj[i]);
 		}
 
 		return new LevelData(levelName, walls, sentrys);
