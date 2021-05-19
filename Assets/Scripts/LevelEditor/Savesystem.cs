@@ -4,7 +4,7 @@ using System.Runtime.Serialization.Formatters.Binary;
 
 public static class Savesystem
 {
-	public const string version = "0.2.0";
+	public const string version = "0.3.0";
 
 
 	// Maybe move this into the LevelEditorManagerScript
@@ -73,7 +73,9 @@ public static class Savesystem
 		//Potentially Cut this down to just Pushing EVERYTHING into Leveldata
 		//and let the Leveldata handle the sorting of Objects?
 
-
+		/////////////////////////////////////////////////////
+		///ONE OF THE PLACES I NEED TO ADD NEW OBJECTS TO ///
+		/////////////////////////////////////////////////////
 
 		//Walls
 		GameObject[] wallObj = GameObject.FindGameObjectsWithTag("Wall");
@@ -104,20 +106,43 @@ public static class Savesystem
 
 		GameObject parent = GameObject.FindGameObjectWithTag("Parent");
 
+
+		/////////////////////////////////////////////////////
+		///ONE OF THE PLACES I NEED TO ADD NEW OBJECTS TO ///
+		/////////////////////////////////////////////////////
+
 		//Walls
-		foreach (Wall wall in level.walls)
+		foreach (Wall obj in level.walls)
 		{
-			if (wall.variant < template.wall.Length)
+			if (obj.variant < template.wall.Length)
 			{
-				GameObject.Instantiate(template.wall[wall.variant], new Vector3(wall.position[0], 0, wall.position[1]), Quaternion.identity, parent.transform);
+				GameObject.Instantiate(template.wall[obj.variant], new Vector3(obj.position[0], 0, obj.position[1]), Quaternion.Euler(0, obj.rotation, 0), parent.transform);
 			}
 			else
 			{
 				Debug.LogWarning("The requested variant does not exist in the template - defaulting to Variant 0");
-				wall.variant = 0;
+				obj.variant = 0;
 			}
 		}
 
 		//TODO Fo Sentrys etc. as well
+		foreach (Sentry obj in level.sentrys)
+		{
+			if (obj.variant < template.wall.Length)
+			{
+				GameObject sentry = GameObject.Instantiate(template.sentry[obj.variant], new Vector3(obj.position[0], 0, obj.position[1]), Quaternion.Euler(0, obj.rotation, 0), parent.transform);
+
+				EnemySight sight = sentry.GetComponent<EnemySight>();
+				sight.offTime = obj.offTime;
+				sight.onTime = obj.onTime;
+				sight.startState = obj.startState;
+				sight.viewDistance = obj.viewDistance;
+			}
+			else
+			{
+				Debug.LogWarning("The requested variant does not exist in the template - defaulting to Variant 0");
+				obj.variant = 0;
+			}
+		}
 	}
 }

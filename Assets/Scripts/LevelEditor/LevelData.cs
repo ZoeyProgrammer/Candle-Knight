@@ -26,7 +26,12 @@ public class Object
 {
 	public int variant = 0;
 	public float[] position = new float[2];
+	public int rotation;
 }
+
+/////////////////////////////////////////////////////
+///ONE OF THE PLACES I NEED TO ADD NEW OBJECTS TO ///
+/////////////////////////////////////////////////////
 
 [System.Serializable]
 public class Wall : Object
@@ -35,6 +40,7 @@ public class Wall : Object
 	{
 		position[0] = wall.transform.position.x;
 		position[1] = wall.transform.position.z;
+		rotation = (int)wall.transform.rotation.eulerAngles.y;
 
 		ObjectMarker data = wall.GetComponent<ObjectMarker>();
 		if (data != null)
@@ -46,14 +52,15 @@ public class Wall : Object
 public class Sentry : Object
 {
 	public bool startState;
-	int viewDistance;
-	float onTime;
-	float offTime;
+	public int viewDistance;
+	public float onTime;
+	public float offTime;
 
 	public Sentry(GameObject sentry)
 	{
 		position[0] = sentry.transform.position.x;
 		position[1] = sentry.transform.position.z;
+		rotation = (int)sentry.transform.rotation.eulerAngles.y;
 
 		ObjectMarker data = sentry.GetComponent<ObjectMarker>();
 		if (data != null)

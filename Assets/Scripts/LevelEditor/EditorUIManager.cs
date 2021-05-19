@@ -147,6 +147,12 @@ public class EditorUIManager : MonoBehaviour
         inputZ.text = manage.SelectedObject.transform.position.z.ToString();
 
         rotationSelection.Value = RotToInt((int)manage.SelectedObject.transform.rotation.eulerAngles.y);
+
+        /////////////////////////////////////////////////////
+        ///ONE OF THE PLACES I NEED TO ADD NEW OBJECTS TO ///
+        /////////////////////////////////////////////////////
+        
+        //Change the Inspector depending on what kind of Selected Object to show Object Specific Data
     }
 
 
