@@ -50,7 +50,7 @@ public class LevelEditorManager : MonoBehaviour
 	private void Update()
 	{ //Potentially only check this whenever an actual grid-change occured?
 		cursorCrosshair.transform.position = CalcPos();
-		if (CheckGrid(currentObject) == null)
+		if (CheckGrid() == null)
 		{
 			cursorCrosshair.endColor = Color.green;
 			cursorCrosshair.startColor = Color.green;
@@ -64,13 +64,18 @@ public class LevelEditorManager : MonoBehaviour
 
 	private void OnLeftclick(InputAction.CallbackContext context)
 	{
-		if (CheckGrid(currentObject) == null)
+		//Check the Bounds - Hardcoded for now until get around to make a nicer alternative
+		if (0 <= CalcPos().x && CalcPos().x <= 25 &&
+			0 <= CalcPos().z && CalcPos().z <= 25)
 		{
-			PlaceObject();
-		}
-		else
-		{
-			SelectObject();
+			if (CheckGrid() == null)
+			{
+				PlaceObject();
+			}
+			else
+			{
+				SelectObject();
+			}
 		}
 	}
 
@@ -82,7 +87,7 @@ public class LevelEditorManager : MonoBehaviour
 
 	private void SelectObject()
 	{
-		GameObject obj = CheckGrid(currentObject);
+		GameObject obj = CheckGrid();
 		selectionCrosshair.enabled = true;
 		selectedObject = obj;
 		selectionCrosshair.transform.position = obj.transform.position;
@@ -95,7 +100,7 @@ public class LevelEditorManager : MonoBehaviour
 
 	private void DestroyObject()
 	{
-		GameObject obj = CheckGrid(currentObject);
+		GameObject obj = CheckGrid();
 		if (obj == selectedObject)
 		{
 			selectedObject = null;
@@ -110,7 +115,7 @@ public class LevelEditorManager : MonoBehaviour
 		selectedObject.transform.rotation = Quaternion.Euler(0, degrees, 0);
 	}
 
-	private GameObject CheckGrid(GameObject obj)
+	private GameObject CheckGrid()
 	{
 		RaycastHit hit;
 		Physics.Raycast(CalcPos() + Vector3.down, Vector3.up * 2, out hit, 2f); //Check if Grid is free
