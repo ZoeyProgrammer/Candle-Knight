@@ -25,7 +25,7 @@ public class Button : MonoBehaviour
 
 	private void OnTriggerEnter(Collider other)
 	{
-		if (other.tag == "Player" || (allowBoxes && other.tag == "Box" ))
+		if (other.tag == "Player" || (allowBoxes && other.tag == "Moveables" ))
 		{
 			isPressed = true;
 			UpdateState();
@@ -34,7 +34,7 @@ public class Button : MonoBehaviour
 
 	private void OnTriggerExit(Collider other)
 	{
-		if (other.tag == "Player" || (allowBoxes && other.tag == "Box"))
+		if (other.tag == "Player" || (allowBoxes && other.tag == "Moveables"))
 		{
 			isPressed = false;
 			UpdateState();
