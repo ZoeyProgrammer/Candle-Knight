@@ -9,7 +9,7 @@ public class EditorUIManager : MonoBehaviour
     [SerializeField] private SliderInput variantSelection, rotationSelection = null;
     [SerializeField] private InputField inputX, inputZ = null;
     [SerializeField] private Transform contextMenus = null;
-    [SerializeField] private GameObject sentryMenu = null;
+    [SerializeField] private GameObject sentryMenu, doorMenu, buttonMenu = null;
 
     private ObjectTemplate template = null;
     private LevelEditorManager manage = null;
@@ -163,6 +163,16 @@ public class EditorUIManager : MonoBehaviour
         currentContextMenu = null;
 
         //Change the Inspector depending on what kind of Selected Object to show Object Specific Data
+        if (manage.SelectedObject.GetComponent<Button>() != null)
+        {
+            currentContextMenu = Instantiate(buttonMenu, contextMenus);
+        }
+
+        if (manage.SelectedObject.GetComponent<Door>() != null)
+        {
+            currentContextMenu = Instantiate(doorMenu, contextMenus);
+        }
+
         if (manage.SelectedObject.GetComponent<EnemySight>() != null)
 		{
             currentContextMenu = Instantiate(sentryMenu, contextMenus);

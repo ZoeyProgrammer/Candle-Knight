@@ -124,7 +124,7 @@ public class LevelEditorManager : MonoBehaviour
 	private GameObject CheckGrid()
 	{
 		RaycastHit hit;
-		Physics.Raycast(CalcPos() + Vector3.down, Vector3.up * 2, out hit, 2f); //Check if Grid is free
+		Physics.Raycast(CalcPos() + Vector3.down, Vector3.up * 3, out hit, 3f); //Check if Grid is free
 		if (hit.collider != null)
 			return hit.collider.gameObject;
 		else

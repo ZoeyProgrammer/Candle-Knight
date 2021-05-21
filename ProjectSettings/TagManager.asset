@@ -8,6 +8,10 @@ TagManager:
   - Sentry
   - Box
   - Parent
+  - Door
+  - Button
+  - Stair
+  - Moveables
   layers:
   - Default
   - TransparentFX

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ObjectMarker : MonoBehaviour
+static public class GameManger
 {
-	public ObjectData data;
+	static public bool[] channels = new bool[21];
 }

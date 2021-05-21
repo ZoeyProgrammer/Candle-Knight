@@ -5,18 +5,46 @@ using UnityEngine;
 public class Door : MonoBehaviour
 {
     [Tooltip("True = Closed | False = Open")]
-    [SerializeField] bool startState = false;
-    
-    private bool currentState = true; 
+    [SerializeField] public int channel = 0;
+    [SerializeField] public bool isInverted = false;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        if (!startState)
-            OpenDoor();
+    private bool currentState = true;
+    private bool channelState = false;
+
+	private void Start()
+	{
+        UpdateState();
+	}
+
+	private void Update()
+	{
+        //Update if Channel state has changed
+		if (GameManger.channels[channel] != channelState)
+		{
+            UpdateState();
+        }
+	}
+
+    public void UpdateState()
+	{
+        channelState = GameManger.channels[channel];
+        if (channelState)
+        {
+            if (isInverted)
+                CloseDoor();
+            else
+                OpenDoor();
+        }
+        else
+        {
+            if (isInverted)
+                OpenDoor();
+            else
+                CloseDoor();
+        }
     }
 
-    public void OpenDoor()
+	public void OpenDoor()
 	{
         if (currentState != false)
 		{

@@ -4,7 +4,7 @@ using System.Runtime.Serialization.Formatters.Binary;
 
 public static class Savesystem
 {
-	public const string version = "0.3.0";
+	public const string version = "0.4.0";
 
 
 	// Maybe move this into the LevelEditorManagerScript
@@ -77,23 +77,15 @@ public static class Savesystem
 		///ONE OF THE PLACES I NEED TO ADD NEW OBJECTS TO ///
 		/////////////////////////////////////////////////////
 
-		//Walls
-		GameObject[] wallObj = GameObject.FindGameObjectsWithTag("Wall");
-		Wall[] walls = new Wall[wallObj.Length];
-		for (int i = 0; i < wallObj.Length; i++)
+		GameObject parent = GameObject.FindGameObjectWithTag("Parent");
+		int childCount = parent.transform.childCount;
+		GameObject[] objArr = new GameObject[childCount];
+		for (int i = 0; i < childCount; i++)
 		{
-			walls[i] = new Wall(wallObj[i]);
+			objArr[i] = parent.transform.GetChild(i).gameObject;
 		}
 
-		//Sentrys
-		GameObject[] sentryObj = GameObject.FindGameObjectsWithTag("Sentry");
-		Sentry[] sentrys = new Sentry[sentryObj.Length];
-		for (int i = 0; i < sentryObj.Length; i++)
-		{
-			sentrys[i] = new Sentry(sentryObj[i]);
-		}
-
-		return new LevelData(levelName, walls, sentrys);
+		return new LevelData(levelName, objArr);
 	}
 
 	private static void BuildLevel(LevelData level, ObjectTemplate template)
@@ -111,8 +103,22 @@ public static class Savesystem
 		///ONE OF THE PLACES I NEED TO ADD NEW OBJECTS TO ///
 		/////////////////////////////////////////////////////
 
+		//Player
+		foreach (PlayerData obj in level.player)
+		{
+			if (obj.variant < template.player.Length)
+			{
+				GameObject.Instantiate(template.player[obj.variant], new Vector3(obj.position[0], 0, obj.position[1]), Quaternion.Euler(0, obj.rotation, 0), parent.transform);
+			}
+			else
+			{
+				Debug.LogWarning("The requested variant does not exist in the template - defaulting to Variant 0");
+				obj.variant = 0;
+			}
+		}
+
 		//Walls
-		foreach (Wall obj in level.walls)
+		foreach (WallData obj in level.walls)
 		{
 			if (obj.variant < template.wall.Length)
 			{
@@ -125,8 +131,73 @@ public static class Savesystem
 			}
 		}
 
-		//TODO Fo Sentrys etc. as well
-		foreach (Sentry obj in level.sentrys)
+		//Buttons
+		foreach (ButtonData obj in level.buttons)
+		{
+			if (obj.variant < template.button.Length)
+			{
+				GameObject buttonObj = GameObject.Instantiate(template.button[obj.variant], new Vector3(obj.position[0], 0, obj.position[1]), Quaternion.Euler(0, obj.rotation, 0), parent.transform);
+
+				Button button = buttonObj.GetComponent<Button>();
+				button.allowBoxes = obj.allowBoxes;
+				button.isInverted = obj.isInverted;
+				button.channel = obj.channel;
+			}
+			else
+			{
+				Debug.LogWarning("The requested variant does not exist in the template - defaulting to Variant 0");
+				obj.variant = 0;
+			}
+		}
+
+		//Doors
+		foreach (DoorData obj in level.doors)
+		{
+			if (obj.variant < template.door.Length)
+			{
+				GameObject doorObj = GameObject.Instantiate(template.door[obj.variant], new Vector3(obj.position[0], 0, obj.position[1]), Quaternion.Euler(0, obj.rotation, 0), parent.transform);
+				
+				Door door = doorObj.GetComponent<Door>();
+				door.isInverted = obj.isInverted;
+				door.channel = obj.channel;
+			}
+			else
+			{
+				Debug.LogWarning("The requested variant does not exist in the template - defaulting to Variant 0");
+				obj.variant = 0;
+			}
+		}
+
+		//Stairs
+		foreach (StairData obj in level.stairs)
+		{
+			if (obj.variant < template.stair.Length)
+			{
+				GameObject.Instantiate(template.stair[obj.variant], new Vector3(obj.position[0], 0, obj.position[1]), Quaternion.Euler(0, obj.rotation, 0), parent.transform);
+			}
+			else
+			{
+				Debug.LogWarning("The requested variant does not exist in the template - defaulting to Variant 0");
+				obj.variant = 0;
+			}
+		}
+
+		//Moveables
+		foreach (MoveableData obj in level.moveables)
+		{
+			if (obj.variant < template.moveable.Length)
+			{
+				GameObject.Instantiate(template.moveable[obj.variant], new Vector3(obj.position[0], 0, obj.position[1]), Quaternion.Euler(0, obj.rotation, 0), parent.transform);
+			}
+			else
+			{
+				Debug.LogWarning("The requested variant does not exist in the template - defaulting to Variant 0");
+				obj.variant = 0;
+			}
+		}
+
+		//Sentry
+		foreach (SentryData obj in level.sentrys)
 		{
 			if (obj.variant < template.wall.Length)
 			{

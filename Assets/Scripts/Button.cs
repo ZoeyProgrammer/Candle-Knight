@@ -4,22 +4,31 @@ using UnityEngine;
 
 public class Button : MonoBehaviour
 {
-	[SerializeField] bool allowBoxes = true;
+	[SerializeField] public bool allowBoxes = true;
+	[SerializeField] public int channel = 0;
+	[SerializeField] public bool isInverted = false;
 
-	public UnityEngine.Events.UnityEvent OnPress;
-    public UnityEngine.Events.UnityEvent OnRemoved;
+	private bool isPressed = false;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+	private void Start()
+	{
+		GameManger.channels[channel] = isInverted;
+	}
+
+	public void UpdateState()
+	{
+		if (isPressed)
+			GameManger.channels[channel] = !isInverted;
+		else
+			GameManger.channels[channel] = isInverted;
+	}
 
 	private void OnTriggerEnter(Collider other)
 	{
 		if (other.tag == "Player" || (allowBoxes && other.tag == "Box" ))
 		{
-			OnPress.Invoke();
+			isPressed = true;
+			UpdateState();
 		}
 	}
 
@@ -27,7 +36,8 @@ public class Button : MonoBehaviour
 	{
 		if (other.tag == "Player" || (allowBoxes && other.tag == "Box"))
 		{
-			OnRemoved.Invoke();
+			isPressed = false;
+			UpdateState();
 		}
 	}
 }
