@@ -9,7 +9,7 @@ public class EditorUIManager : MonoBehaviour
     [SerializeField] private SliderInput variantSelection, rotationSelection = null;
     [SerializeField] private InputField inputX, inputZ = null;
     [SerializeField] private Transform contextMenus = null;
-    [SerializeField] private GameObject sentryMenu, doorMenu, buttonMenu = null;
+    [SerializeField] private GameObject sentryMenu, doorMenu, stairMenu, buttonMenu = null;
 
     private ObjectTemplate template = null;
     private LevelEditorManager manage = null;
@@ -166,6 +166,11 @@ public class EditorUIManager : MonoBehaviour
         if (manage.SelectedObject.GetComponent<Button>() != null)
         {
             currentContextMenu = Instantiate(buttonMenu, contextMenus);
+        }
+
+        if (manage.SelectedObject.GetComponent<LevelChange>() != null)
+        {
+            currentContextMenu = Instantiate(stairMenu, contextMenus);
         }
 
         if (manage.SelectedObject.GetComponent<Door>() != null)

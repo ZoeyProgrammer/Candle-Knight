@@ -173,7 +173,10 @@ public static class Savesystem
 		{
 			if (obj.variant < template.stair.Length)
 			{
-				GameObject.Instantiate(template.stair[obj.variant], new Vector3(obj.position[0], 0, obj.position[1]), Quaternion.Euler(0, obj.rotation, 0), parent.transform);
+				GameObject stairObj = GameObject.Instantiate(template.stair[obj.variant], new Vector3(obj.position[0], 0, obj.position[1]), Quaternion.Euler(0, obj.rotation, 0), parent.transform);
+
+				LevelChange stair = stairObj.GetComponent<LevelChange>();
+				stair.nextScene = obj.nextScene;
 			}
 			else
 			{

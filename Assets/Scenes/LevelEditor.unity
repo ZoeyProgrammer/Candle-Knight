@@ -1611,6 +1611,7 @@ MonoBehaviour:
   contextMenus: {fileID: 371881528}
   sentryMenu: {fileID: 3763080890755427653, guid: 9d267cfac669cf944914819b9eba70e4, type: 3}
   doorMenu: {fileID: 7550031433607947508, guid: c32add70e85bcc648a91beb01065b970, type: 3}
+  stairMenu: {fileID: 3991095845584487405, guid: 0e829f58e7c0ad344bb7ec404ad93b3c, type: 3}
   buttonMenu: {fileID: 9018015985831727038, guid: b3cdc5f7df3d06449b29513a0ff36788, type: 3}
 --- !u!1 &1025650843
 GameObject:
