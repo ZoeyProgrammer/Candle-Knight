@@ -5,8 +5,8 @@ using UnityEngine.UI;
 
 public class SentryInspector : MonoBehaviour
 {
-	[SerializeField] private Toggle listensToggle, isInvertedToggle, isContinous = null;
-	[SerializeField] private SliderInput channelSlider, onTimeSlider, offTimeSlider, viewDistanceSlider = null;
+	[SerializeField] private Toggle listensToggle, isInvertedToggle, isContinous;
+	[SerializeField] private SliderInput channelSlider, onTimeSlider, offTimeSlider, viewDistanceSlider;
 
 	private LevelEditorManager manage = null;
 	private EnemySight currentSelected = null;
@@ -19,6 +19,7 @@ public class SentryInspector : MonoBehaviour
 		if (sentry != null)
 		{
 			currentSelected = sentry;
+			Debug.Log(sentry.name);
 
 			listensToggle.isOn = sentry.listens;
 			isInvertedToggle.isOn = sentry.isInverted;

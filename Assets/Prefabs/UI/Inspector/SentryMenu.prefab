@@ -178,6 +178,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8461806057374016599, guid: 0c5fcf80662917748a52fcc50d02de33, type: 3}
+      propertyPath: currentValue
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8461806057374016599, guid: 0c5fcf80662917748a52fcc50d02de33, type: 3}
       propertyPath: OnUpdate.m_PersistentCalls.m_Calls.Array.size
       value: 1
       objectReference: {fileID: 0}
@@ -799,6 +803,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8461806057374016599, guid: 0c5fcf80662917748a52fcc50d02de33, type: 3}
       propertyPath: minValue
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8461806057374016599, guid: 0c5fcf80662917748a52fcc50d02de33, type: 3}
+      propertyPath: currentValue
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8461806057374016599, guid: 0c5fcf80662917748a52fcc50d02de33, type: 3}

@@ -19,11 +19,16 @@ public class SliderInput : MonoBehaviour
 
 	private void Awake()
 	{
+        SetValues();
+	}
+
+    private void SetValues()
+	{
         slider.minValue = minValue;
         slider.maxValue = maxValue;
         slider.value = currentValue;
         input.text = currentValue.ToString();
-	}
+    }
 
 	private void SetMax(int value)
 	{
@@ -39,6 +44,8 @@ public class SliderInput : MonoBehaviour
 
     private void SetValue(int value)
 	{
+        SetValues(); //There were some weird Bugs, so thats why this is here
+
         currentValue = value;
         input.text = value.ToString();
         slider.value = value;
@@ -61,12 +68,14 @@ public class SliderInput : MonoBehaviour
         }
         else if (slider.value > maxValue)
 		{
+            Debug.LogWarning("Slider Value above Max Value - Setting to Max");
             currentValue = maxValue;
             input.text = maxValue.ToString();
             OnUpdate.Invoke(currentValue);
         }
         else if (slider.value < minValue)
 		{
+            Debug.LogWarning("Slider Value below Min Value - Setting to Min");
             currentValue = minValue;
             input.text = minValue.ToString();
             OnUpdate.Invoke(currentValue);
@@ -83,12 +92,14 @@ public class SliderInput : MonoBehaviour
         }
         else if (value > maxValue)
         {
+            Debug.LogWarning("Slider Value above Max Value - Setting to Max");
             currentValue = maxValue;
             slider.value = maxValue;
             input.text = maxValue.ToString();
         }
         else if (value < minValue)
         {
+            Debug.LogWarning("Slider Value below Min Value - Setting to Min");
             currentValue = minValue;
             slider.value = minValue;
             input.text = minValue.ToString();

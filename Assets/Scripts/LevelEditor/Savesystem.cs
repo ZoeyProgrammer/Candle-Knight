@@ -202,7 +202,7 @@ public static class Savesystem
 		//Sentry
 		foreach (SentryData obj in level.sentrys)
 		{
-			if (obj.variant < template.wall.Length)
+			if (obj.variant < template.sentry.Length)
 			{
 				GameObject sentry = GameObject.Instantiate(template.sentry[obj.variant], new Vector3(obj.position[0], 0, obj.position[1]), Quaternion.Euler(0, obj.rotation, 0), parent.transform);
 
