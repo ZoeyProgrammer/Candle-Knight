@@ -15,15 +15,17 @@ MonoBehaviour:
   player:
   - {fileID: 1966126839098292880, guid: 655306ec69fc8cd499c8df44fdd1d9a5, type: 3}
   wall:
-  - {fileID: 7516720263652062151, guid: cc5ccb75729da3848ac64b60daf24db1, type: 3}
-  - {fileID: 8067219892786643460, guid: 558b3e17147aaaf40a27c84d35c567f2, type: 3}
+  - {fileID: 6217161696803087870, guid: ffa8e6b3496206048bfaa59c6d4b2e20, type: 3}
+  - {fileID: 2896276223159851838, guid: 3c267ae9dae828a4aa86c6b39fa7fd34, type: 3}
+  - {fileID: 3950566132481550789, guid: e472df644a53bf44798b48ad2f9b4df4, type: 3}
   button:
-  - {fileID: 2125960582466858322, guid: b48f44b6a378b8d488a4694550b7ae5e, type: 3}
+  - {fileID: 6007054714578438734, guid: 63606ee0130f57e439baf7c28defecf4, type: 3}
   door:
-  - {fileID: 2630095901533069575, guid: 59a3d3a5e74f6a848beba6525230a1b9, type: 3}
+  - {fileID: 5120749851619631396, guid: d96078c78f9030f4b966f12f920701fe, type: 3}
   stair:
-  - {fileID: 4213119888562293345, guid: 02a461a8870c28040a42ac766f733147, type: 3}
+  - {fileID: 2109316848891047953, guid: eb2dfb7dff3e2ed4191ea085f2288edd, type: 3}
   moveable:
-  - {fileID: 4647942501952682047, guid: d12401c56595a9a448ac903a22315a1c, type: 3}
+  - {fileID: 509810171471632135, guid: 3004618fe97a976469e75643fe4fa5cf, type: 3}
+  - {fileID: 4696749904840678116, guid: 0df8f5be66d20744eb47fc863b9ba729, type: 3}
   sentry:
-  - {fileID: 5347871797944720487, guid: f952db7b25862d844a4dfe0ca809f709, type: 3}
+  - {fileID: 7386301732632641513, guid: 82fa1a11b67690f498c835a0ff5b77df, type: 3}

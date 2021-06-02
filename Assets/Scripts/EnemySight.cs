@@ -6,72 +6,108 @@ public class EnemySight : MonoBehaviour
 {
     [Tooltip("The Layers which Interrupt the Beam including Player")]
     [SerializeField] private LayerMask layerMask;
-    [SerializeField] public bool startState = true;
-    [SerializeField] public int viewDistance = 5;
-    [SerializeField] public float onTime = 1f;
-    [SerializeField] public float offTime = 1f;
 
-    private LineRenderer laser = null;
+    [SerializeField] public int viewDistance = 5;
+    [SerializeField] public bool isContinous = false;
+    [SerializeField] public int onTime = 1;
+    [SerializeField] public int offTime = 1;
+
+    [SerializeField] public int channel = 0;
+    [SerializeField] public bool isInverted = false; // Standard: True = SightOff | False = SightOn
+    [SerializeField] public bool listens = true;
+
+    private LineRenderer sightLine = null;
 
     public UnityEngine.Events.UnityEvent OnDetection;
 
-    private bool currentState = false;
-    private float timer;
+    private bool currentState = true;
+    private bool channelState = false;
+    private bool isEnabled = true;
+    private int lastTick = 0;
+    private int tickTimer = 0;
 
-    // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
-        currentState = startState;
-        if (currentState)
-            timer = onTime;
-        else
-            timer = offTime;
+        sightLine = GetComponent<LineRenderer>();
+        sightLine.SetPosition(0, transform.position + Vector3.up * 1.5f);
 
-        laser = GetComponent<LineRenderer>();
-        laser.SetPosition(0, transform.position + Vector3.up * 0.5f);
+        if (listens)
+            UpdateState();
     }
 
-    // Update is called once per frame
+    public void UpdateState()
+    {
+        channelState = GameManger.channels[channel];
+        if (channelState && listens)
+        {
+            if (isInverted)
+                isEnabled = true;
+            else
+                isEnabled = false;
+        }
+        else if (listens)
+        {
+            if (isInverted)
+                isEnabled = false;
+            else
+                isEnabled = true;
+        }
+        else
+		{
+            isEnabled = true;
+		}
+    }
+
     void Update()
     {
-        timer -= Time.deltaTime;
-
-        if (timer <= 0)
+        //Update if Channel state has changed
+        if (listens && GameManger.channels[channel] != channelState)
         {
-            if (!currentState)
-			{
-                timer = onTime;
-                currentState = true;
-            }
-            else
-			{
-                timer = offTime;
-                currentState = false;
-            }
+            UpdateState();
         }
 
+        //Tick System
+        if (!isContinous && GameManger.tick != lastTick)
+		{
+            tickTimer += 1;
+            lastTick = GameManger.tick;
+
+            if (currentState && tickTimer >= onTime)
+			{
+                // Deactivate the Sightline
+                tickTimer = 0;
+                currentState = false;
+            }
+            else if (!currentState && tickTimer >= offTime)
+			{
+                // Activate the Sightline
+                tickTimer = 0;
+                currentState = true;
+            }
+		}
+
         //Player Detection - Need to change this up so it only detects the player once until he gets back out again
-        if (currentState)
+        if (currentState && isEnabled)
         {
             RaycastHit hit;
-            if (Physics.Raycast(transform.position + Vector3.up * 0.5f, this.transform.forward, out hit, viewDistance, layerMask))
+            if (Physics.Raycast(transform.position + Vector3.up * 1.5f, this.transform.forward, out hit, viewDistance, layerMask))
 			{
-                laser.SetPosition(1, hit.point);
+                sightLine.SetPosition(1, hit.point);
                 if (hit.collider.gameObject.tag == "Player")
                 {
-                    OnDetection.Invoke();
+                    //OnDetection.Invoke(); //Change this so it just does something to the Player
                 }
             }
             else
 			{
-                laser.SetPosition(1, (transform.position + Vector3.up * 0.5f) + transform.forward * viewDistance);
+                sightLine.SetPosition(1, (transform.position + Vector3.up * 1.5f) + transform.forward * viewDistance);
             }
 
-            laser.enabled = true;
+            sightLine.enabled = true;
         }
         else
 		{
-            laser.enabled = false;
+            sightLine.enabled = false;
 		}
     }
 }

@@ -207,10 +207,13 @@ public static class Savesystem
 				GameObject sentry = GameObject.Instantiate(template.sentry[obj.variant], new Vector3(obj.position[0], 0, obj.position[1]), Quaternion.Euler(0, obj.rotation, 0), parent.transform);
 
 				EnemySight sight = sentry.GetComponent<EnemySight>();
-				sight.offTime = obj.offTime;
-				sight.onTime = obj.onTime;
-				sight.startState = obj.startState;
 				sight.viewDistance = obj.viewDistance;
+				sight.isContinous = obj.isContinous;
+				sight.onTime = obj.onTime;
+				sight.offTime = obj.offTime;
+				sight.channel = obj.channel;
+				sight.isInverted = obj.isInverted;
+				sight.listens = obj.listens;
 			}
 			else
 			{

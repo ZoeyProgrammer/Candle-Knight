@@ -41,7 +41,10 @@ public class CharacterMovement : MonoBehaviour
 		if (!Physics.Raycast(transform.position + Vector3.up * 0.5f, Vector3.forward, out hit, 1, layerMask))
 		{
 			if (isAllowedToMove)
+			{
 				this.gameObject.transform.position += Vector3.forward;
+				GameManger.tick++;
+			}
 		}
 		else if (hit.collider.gameObject.GetComponent<Box>() != null)
 		{
@@ -55,7 +58,10 @@ public class CharacterMovement : MonoBehaviour
 		if (!Physics.Raycast(transform.position + Vector3.up * 0.5f, -Vector3.forward, out hit, 1, layerMask))
 		{
 			if (isAllowedToMove)
+			{
 				this.gameObject.transform.position -= Vector3.forward;
+				GameManger.tick++;
+			}
 		}
 		else if (hit.collider.gameObject.GetComponent<Box>() != null)
 		{
@@ -69,7 +75,10 @@ public class CharacterMovement : MonoBehaviour
 		if (!Physics.Raycast(transform.position + Vector3.up * 0.5f, Vector3.right, out hit, 1, layerMask))
 		{
 			if (isAllowedToMove)
+			{
 				this.gameObject.transform.position += Vector3.right;
+				GameManger.tick++;
+			}
 		}
 		else if (hit.collider.gameObject.GetComponent<Box>() != null)
 		{
@@ -83,7 +92,10 @@ public class CharacterMovement : MonoBehaviour
 		if (!Physics.Raycast(transform.position + Vector3.up * 0.5f, -Vector3.right, out hit, 1, layerMask))
 		{
 			if (isAllowedToMove)
+			{
 				this.gameObject.transform.position -= Vector3.right;
+				GameManger.tick++;
+			}
 		}
 		else if (hit.collider.gameObject.GetComponent<Box>() != null)
 		{

@@ -6,7 +6,7 @@ public class Door : MonoBehaviour
 {
     [Tooltip("True = Closed | False = Open")]
     [SerializeField] public int channel = 0;
-    [SerializeField] public bool isInverted = false;
+    [SerializeField] public bool isInverted = false; // Standard: True = Closed | False = Open
 
     private bool currentState = true;
     private bool channelState = false;

@@ -165,20 +165,26 @@ public class MoveableData : ObjectData
 [System.Serializable]
 public class SentryData : ObjectData
 {
-	public bool startState;
-	public int viewDistance;
-	public float onTime;
-	public float offTime;
+	public int viewDistance = 5;
+	public bool isContinous = false;
+	public int onTime = 1;
+	public int offTime = 1;
+	public int channel = 0;
+	public bool isInverted = false;
+	public bool listens = true;
 
 	public SentryData(GameObject obj) : base(obj)
 	{
 		EnemySight sight = obj.GetComponent<EnemySight>();
 		if (sight != null)
 		{
-			startState = sight.startState;
 			viewDistance = sight.viewDistance;
+			isContinous = sight.isContinous;
 			onTime = sight.onTime;
 			offTime = sight.offTime;
+			channel = sight.channel;
+			isInverted = sight.isInverted;
+			listens = sight.listens;
 		}
 	}
 }
