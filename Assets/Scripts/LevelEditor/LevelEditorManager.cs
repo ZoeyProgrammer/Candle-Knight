@@ -64,7 +64,7 @@ public class LevelEditorManager : MonoBehaviour
 
 	private void OnLeftclick(InputAction.CallbackContext context)
 	{
-		//Check the Bounds - Hardcoded for now until get around to make a nicer alternative
+		//Check the Bounds - Hardcoded for now until get around to make a nicer alternative (Maybe in a Constants Data)
 		if (0 <= CalcPos().x && CalcPos().x <= 25 &&
 			0 <= CalcPos().z && CalcPos().z <= 25)
 		{

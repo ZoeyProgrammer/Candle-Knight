@@ -29,7 +29,7 @@ public class EditorUIManager : MonoBehaviour
         objectSelection.options.Clear();
         foreach (GameObject[] obj in template.Contains())
 		{
-            objectSelection.options.Add(new Dropdown.OptionData(obj[0].name));
+            objectSelection.options.Add(new Dropdown.OptionData(obj[0].name)); 
         }
 
         variantSelection.UpdateNull();
@@ -93,7 +93,7 @@ public class EditorUIManager : MonoBehaviour
         manage.RotateObject(IntToRot(option));
     }
 
-    private int IntToRot(int option)
+    private int IntToRot(int option) //option * 90
 	{
         switch (option)
         {
@@ -110,7 +110,7 @@ public class EditorUIManager : MonoBehaviour
         }
     }
 
-    private int RotToInt(int degree)
+    private int RotToInt(int degree) //option / 90
     {
         switch (degree)
         {

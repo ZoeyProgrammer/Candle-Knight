@@ -17,7 +17,6 @@ public class ObjectTemplate : ScriptableObject
     public GameObject[] moveable = null;
     public GameObject[] sentry = null;
 
-    // Function which puts everything into a Array
     public GameObject[][] Contains()
 	{
         List<GameObject[]> list = new List<GameObject[]>();

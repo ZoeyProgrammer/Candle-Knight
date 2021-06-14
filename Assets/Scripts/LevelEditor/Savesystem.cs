@@ -70,13 +70,6 @@ public static class Savesystem
 
 	private static LevelData GetLevelData(string levelName)
 	{
-		//Potentially Cut this down to just Pushing EVERYTHING into Leveldata
-		//and let the Leveldata handle the sorting of Objects?
-
-		/////////////////////////////////////////////////////
-		///ONE OF THE PLACES I NEED TO ADD NEW OBJECTS TO ///
-		/////////////////////////////////////////////////////
-
 		GameObject parent = GameObject.FindGameObjectWithTag("Parent");
 		int childCount = parent.transform.childCount;
 		GameObject[] objArr = new GameObject[childCount];
