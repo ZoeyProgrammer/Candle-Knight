@@ -18,8 +18,11 @@ public static class Savesystem
 	{
 		LevelData levelData = LoadFromFile(levelName);
 		//TODO: Ask User if he is sure here maybe -> Errorcheck the current Version vs. File Version
-		ClearLevel();
-		BuildLevel(levelData, template);
+		if(levelData != null)
+		{
+			ClearLevel();
+			BuildLevel(levelData, template);
+		}
 	}
 
 	//Till here

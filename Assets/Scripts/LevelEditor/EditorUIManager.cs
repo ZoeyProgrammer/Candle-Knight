@@ -7,15 +7,16 @@ public class EditorUIManager : MonoBehaviour
 {
     [SerializeField] private Dropdown objectSelection = null;
     [SerializeField] private SliderInput variantSelection, rotationSelection = null;
-    [SerializeField] private InputField inputX, inputZ = null;
+    [SerializeField] private InputField inputX, inputZ, saveInput, loadInput = null;
     [SerializeField] private Transform contextMenus = null;
-    [SerializeField] private GameObject sentryMenu, doorMenu, stairMenu, buttonMenu = null;
+    [SerializeField] private GameObject sentryMenu, doorMenu, stairMenu, buttonMenu, editorContext, saveContext, loadContext = null;
 
     private ObjectTemplate template = null;
     private LevelEditorManager manage = null;
     private int currentObject = 0;
     private int currentVariant = 0;
     private int currentRotation = 0;
+    private string currentLevelName = null;
     private GameObject selectedObject = null;
 
     private GameObject currentContextMenu = null;
@@ -36,16 +37,42 @@ public class EditorUIManager : MonoBehaviour
         variantSelection.MaxValue = template.Contains()[currentObject].Length - 1;
     }
 
+    public void MenuChange(int menu)
+	{
+		switch (menu)
+		{
+            case 0: //Save Menu
+                saveContext.SetActive(true);
+                loadContext.SetActive(false);
+                editorContext.SetActive(false);
+                break;
+            case 1: //Load Menu
+                saveContext.SetActive(false);
+                loadContext.SetActive(true);
+                editorContext.SetActive(false);
+                break;
+            case 2: //Editor Menu
+                saveContext.SetActive(false);
+                loadContext.SetActive(false);
+                editorContext.SetActive(true);
+                break;
+            case 3: //Preview Menu
+                break;
+            case 4: //Play Menu
+                break;
+            default:
+				break;
+		}
+	}
+
     public void SaveLevel() //For the Button
     {
-        Savesystem.SaveLevel("test");
-        //TODO: Actually make this take a String too, and save it under that name
+        Savesystem.SaveLevel(currentLevelName);
     }
 
     public void LoadLevel() //For the Button
     {
-        Savesystem.LoadLevel("test", template);
-        //TODO: Actually make this take a String too, and search
+        Savesystem.LoadLevel(currentLevelName, template);
         //Maybe actually make this a Selection Menu which first scans for all .lvl data it can find?
     }
 
@@ -92,6 +119,13 @@ public class EditorUIManager : MonoBehaviour
 	{
         manage.RotateObject(IntToRot(option));
     }
+
+    public void SetLevelName(string lvlName)
+	{
+        currentLevelName = lvlName;
+        loadInput.text = lvlName;
+        saveInput.text = lvlName;
+	}
 
     private int IntToRot(int option) //option * 90
 	{
