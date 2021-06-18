@@ -29,3 +29,5 @@ MonoBehaviour:
   - {fileID: 4696749904840678116, guid: 0df8f5be66d20744eb47fc863b9ba729, type: 3}
   sentry:
   - {fileID: 7386301732632641513, guid: 82fa1a11b67690f498c835a0ff5b77df, type: 3}
+  firepit:
+  - {fileID: 4612674651204434963, guid: 71c2c28b8b2b51540a4213f1291496f5, type: 3}

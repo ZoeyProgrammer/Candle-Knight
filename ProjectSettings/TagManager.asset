@@ -12,6 +12,7 @@ TagManager:
   - Button
   - Stair
   - Moveables
+  - Firepit
   layers:
   - Default
   - TransparentFX
