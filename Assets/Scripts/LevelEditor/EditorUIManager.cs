@@ -164,6 +164,7 @@ public class EditorUIManager : MonoBehaviour
     private void PushCurrentObject()
 	{
         manage.CurrentObject = template.Contains()[currentObject][currentVariant];
+        manage.CurrentVariant = currentVariant;
 	}
 
     private void PushCurrentRotation()

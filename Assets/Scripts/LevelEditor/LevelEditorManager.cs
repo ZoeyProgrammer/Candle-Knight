@@ -15,6 +15,9 @@ public class LevelEditorManager : MonoBehaviour
 	public GameObject CurrentObject { get => this.currentObject; set => this.currentObject = value; }
 	private GameObject currentObject = null;
 
+	public int CurrentVariant {set => this.currentVariant = value; }
+	private int currentVariant = 0;
+
 	public Quaternion CurrentRotation { get => this.currentRotation; set => this.currentRotation = value; }
 	private Quaternion currentRotation = Quaternion.identity;
 
@@ -82,6 +85,9 @@ public class LevelEditorManager : MonoBehaviour
 	private void PlaceObject()
 	{
 		GameObject obj = Instantiate(currentObject, CalcPos(), currentRotation, parentObject.transform);
+		ObjectMarker marker = obj.GetComponent<ObjectMarker>();
+		if (marker != null)
+			marker.variant = currentVariant;
 		Debug.Log("Object Placed successfully");
 	}
 

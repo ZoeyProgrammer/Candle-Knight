@@ -2,14 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.VFX;
 
 public class CharacterMovement : MonoBehaviour
 {
 	[Tooltip("The Layers which get detected as Walls.")]
 	[SerializeField] private LayerMask layerMask;
 
+	[SerializeField] private VisualEffect headFlame = null;
+	
 	private InputMaster inputMaster = null;
 	public bool isAllowedToMove = true;
+	public bool isLit = true;
 
 	private Vector2 controllerPos = Vector2.zero;
 
@@ -33,6 +37,18 @@ public class CharacterMovement : MonoBehaviour
 	private void OnDisable()
 	{
 		inputMaster.Disable();
+	}
+
+	public void DisableFlame()
+	{
+		isLit = false;
+		headFlame.Stop();
+	}
+
+	public void EnableFlame()
+	{
+		isLit = true;
+		headFlame.Play();
 	}
 
 	void Forwards(InputAction.CallbackContext context)

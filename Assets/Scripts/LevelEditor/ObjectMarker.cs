@@ -4,5 +4,5 @@ using UnityEngine;
 
 public class ObjectMarker : MonoBehaviour
 {
-	public ObjectData data;
+	public int variant = 0;
 }

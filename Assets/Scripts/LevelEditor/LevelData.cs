@@ -80,7 +80,7 @@ public class ObjectData
 
 		ObjectMarker data = obj.GetComponent<ObjectMarker>();
 		if (data != null)
-			variant = data.data.variant;
+			variant = data.variant;
 	}
 }
 

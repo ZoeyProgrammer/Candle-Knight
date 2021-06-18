@@ -41,6 +41,7 @@ GameObject:
   - component: {fileID: 2630095901533069579}
   - component: {fileID: 2630095901533069572}
   - component: {fileID: 2630095901533069576}
+  - component: {fileID: 986236876896714371}
   m_Layer: 0
   m_Name: DoorTemplate
   m_TagString: Door
@@ -90,3 +91,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   channel: 0
   isInverted: 0
+--- !u!114 &986236876896714371
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2630095901533069575}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 375f209e1168e49439b1ac10ebfa71a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  variant: 0

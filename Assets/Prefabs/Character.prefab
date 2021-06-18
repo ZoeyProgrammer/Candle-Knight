@@ -72,7 +72,9 @@ MonoBehaviour:
   layerMask:
     serializedVersion: 2
     m_Bits: 1
+  headFlame: {fileID: 1718862602861213976}
   isAllowedToMove: 1
+  isLit: 1
 --- !u!54 &2793495244859032477
 Rigidbody:
   m_ObjectHideFlags: 0

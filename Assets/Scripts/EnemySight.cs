@@ -95,7 +95,9 @@ public class EnemySight : MonoBehaviour
                 sightLine.SetPosition(1, hit.point);
                 if (hit.collider.gameObject.tag == "Player")
                 {
-                    //OnDetection.Invoke(); //Change this so it just does something to the Player
+                    CharacterMovement player = hit.collider.gameObject.GetComponent<CharacterMovement>();
+                    if (player != null)
+                        player.DisableFlame();
                 }
             }
             else

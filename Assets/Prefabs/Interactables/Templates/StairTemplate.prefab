@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5805826456730739849}
   - component: {fileID: 584476139572002112}
   - component: {fileID: 545790155023790556}
+  - component: {fileID: -1159465854163477757}
   m_Layer: 0
   m_Name: StairTemplate
   m_TagString: Stair
@@ -59,6 +60,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nextScene: 
+--- !u!114 &-1159465854163477757
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4213119888562293345}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 375f209e1168e49439b1ac10ebfa71a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  variant: 0
 --- !u!1 &6521194416186126651
 GameObject:
   m_ObjectHideFlags: 0

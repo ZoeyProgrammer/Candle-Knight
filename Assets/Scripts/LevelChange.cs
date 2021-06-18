@@ -11,7 +11,15 @@ public class LevelChange : MonoBehaviour
 	{
 		if (other.tag == "Player")
 		{
-			SceneManager.LoadSceneAsync(nextScene);
+			CharacterMovement player = other.gameObject.GetComponent<CharacterMovement>();
+			if (player != null && player.isLit)
+			{
+				SceneManager.LoadSceneAsync(nextScene);
+			}
+			else
+			{
+				//Whatever should happen when the flame is not LIT here
+			}
 		}
 	}
 }
