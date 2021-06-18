@@ -16,6 +16,7 @@ public class ObjectTemplate : ScriptableObject
     public GameObject[] stair = null;
     public GameObject[] moveable = null;
     public GameObject[] sentry = null;
+    public GameObject[] firepit = null;
 
     public GameObject[][] Contains()
 	{
@@ -42,6 +43,9 @@ public class ObjectTemplate : ScriptableObject
         if (sentry != null)
             list.Add(sentry);
 
-		return list.ToArray();
+        if (firepit != null)
+            list.Add(firepit);
+
+        return list.ToArray();
 	}
 }

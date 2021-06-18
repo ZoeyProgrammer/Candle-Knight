@@ -217,5 +217,19 @@ public static class Savesystem
 				obj.variant = 0;
 			}
 		}
+
+		//Firepits
+		foreach (FirepitData obj in level.firepits)
+		{
+			if (obj.variant < template.firepit.Length)
+			{
+				GameObject.Instantiate(template.firepit[obj.variant], new Vector3(obj.position[0], 0, obj.position[1]), Quaternion.Euler(0, obj.rotation, 0), parent.transform);
+			}
+			else
+			{
+				Debug.LogWarning("The requested variant does not exist in the template - defaulting to Variant 0");
+				obj.variant = 0;
+			}
+		}
 	}
 }

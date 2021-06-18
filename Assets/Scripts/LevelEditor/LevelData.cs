@@ -15,6 +15,7 @@ public class LevelData
 	public StairData[] stairs;
 	public MoveableData[] moveables;
 	public SentryData[] sentrys;
+	public FirepitData[] firepits;
 
 	public LevelData(string levelName,WallData[] wallArr, SentryData[] sentryArr)
 	{
@@ -38,6 +39,8 @@ public class LevelData
 		List<StairData> stairsList = new List<StairData>();
 		List<MoveableData> moveablesList = new List<MoveableData>();
 		List<SentryData> sentryList = new List<SentryData>();
+		List<FirepitData> firepitList = new List<FirepitData>();
+
 		foreach (GameObject obj in objArr)
 		{
 			if (obj.tag == "Player")
@@ -54,6 +57,8 @@ public class LevelData
 				moveablesList.Add(new MoveableData(obj));
 			if (obj.tag == "Sentry")
 				sentryList.Add(new SentryData(obj));
+			if (obj.tag == "Firepit")
+				firepitList.Add(new FirepitData(obj));
 		}
 		player = playerList.ToArray();
 		walls = wallsList.ToArray();
@@ -62,6 +67,7 @@ public class LevelData
 		stairs = stairsList.ToArray();
 		moveables = moveablesList.ToArray();
 		sentrys = sentryList.ToArray();
+		firepits = firepitList.ToArray();
 	}
 }
 
@@ -186,5 +192,13 @@ public class SentryData : ObjectData
 			isInverted = sight.isInverted;
 			listens = sight.listens;
 		}
+	}
+}
+
+[System.Serializable]
+public class FirepitData : ObjectData
+{
+	public FirepitData(GameObject obj) : base(obj)
+	{
 	}
 }
