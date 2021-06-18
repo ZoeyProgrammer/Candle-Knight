@@ -5,8 +5,6 @@ using UnityEngine.SceneManagement;
 
 public class LevelChange : MonoBehaviour
 {
-    [SerializeField] public string nextScene;
-
 	private void OnTriggerEnter(Collider other)
 	{
 		if (other.tag == "Player")
@@ -14,7 +12,10 @@ public class LevelChange : MonoBehaviour
 			CharacterMovement player = other.gameObject.GetComponent<CharacterMovement>();
 			if (player != null && player.isLit)
 			{
-				SceneManager.LoadSceneAsync(nextScene);
+				GameManger.currentLevel++;
+				LevelController controller = FindObjectOfType<LevelController>();
+				if (controller != null)
+					controller.LoadLevel();
 			}
 			else
 			{

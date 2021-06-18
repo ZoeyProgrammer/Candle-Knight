@@ -149,14 +149,8 @@ public class DoorData : ObjectData
 [System.Serializable]
 public class StairData : ObjectData
 {
-	public string nextScene = null;
 	public StairData(GameObject obj) : base(obj)
 	{
-		LevelChange stair = obj.GetComponent<LevelChange>();
-		if (stair != null)
-		{
-			nextScene = stair.nextScene;
-		}
 	}
 }
 
