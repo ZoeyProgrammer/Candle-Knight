@@ -104,7 +104,10 @@ public static class Savesystem
 		{
 			if (obj.variant < template.player.Length)
 			{
-				GameObject.Instantiate(template.player[obj.variant], new Vector3(obj.position[0], 0, obj.position[1]), Quaternion.Euler(0, obj.rotation, 0), parent.transform);
+				GameObject gObj = GameObject.Instantiate(template.player[obj.variant], new Vector3(obj.position[0], 0, obj.position[1]), Quaternion.Euler(0, obj.rotation, 0), parent.transform);
+				ObjectMarker marker = gObj.GetComponent<ObjectMarker>();
+				if (marker != null)
+					marker.variant = obj.variant;
 			}
 			else
 			{
@@ -118,7 +121,10 @@ public static class Savesystem
 		{
 			if (obj.variant < template.wall.Length)
 			{
-				GameObject.Instantiate(template.wall[obj.variant], new Vector3(obj.position[0], 0, obj.position[1]), Quaternion.Euler(0, obj.rotation, 0), parent.transform);
+				GameObject gObj = GameObject.Instantiate(template.wall[obj.variant], new Vector3(obj.position[0], 0, obj.position[1]), Quaternion.Euler(0, obj.rotation, 0), parent.transform);
+				ObjectMarker marker = gObj.GetComponent<ObjectMarker>();
+				if (marker != null)
+					marker.variant = obj.variant;
 			}
 			else
 			{
@@ -132,9 +138,12 @@ public static class Savesystem
 		{
 			if (obj.variant < template.button.Length)
 			{
-				GameObject buttonObj = GameObject.Instantiate(template.button[obj.variant], new Vector3(obj.position[0], 0, obj.position[1]), Quaternion.Euler(0, obj.rotation, 0), parent.transform);
+				GameObject gObj = GameObject.Instantiate(template.button[obj.variant], new Vector3(obj.position[0], 0, obj.position[1]), Quaternion.Euler(0, obj.rotation, 0), parent.transform);
+				ObjectMarker marker = gObj.GetComponent<ObjectMarker>();
+				if (marker != null)
+					marker.variant = obj.variant;
 
-				Button button = buttonObj.GetComponent<Button>();
+				Button button = gObj.GetComponent<Button>();
 				button.allowBoxes = obj.allowBoxes;
 				button.isInverted = obj.isInverted;
 				button.channel = obj.channel;
@@ -151,9 +160,12 @@ public static class Savesystem
 		{
 			if (obj.variant < template.door.Length)
 			{
-				GameObject doorObj = GameObject.Instantiate(template.door[obj.variant], new Vector3(obj.position[0], 0, obj.position[1]), Quaternion.Euler(0, obj.rotation, 0), parent.transform);
-				
-				Door door = doorObj.GetComponent<Door>();
+				GameObject gObj = GameObject.Instantiate(template.door[obj.variant], new Vector3(obj.position[0], 0, obj.position[1]), Quaternion.Euler(0, obj.rotation, 0), parent.transform);
+				ObjectMarker marker = gObj.GetComponent<ObjectMarker>();
+				if (marker != null)
+					marker.variant = obj.variant;
+
+				Door door = gObj.GetComponent<Door>();
 				door.isInverted = obj.isInverted;
 				door.channel = obj.channel;
 			}
@@ -169,7 +181,10 @@ public static class Savesystem
 		{
 			if (obj.variant < template.stair.Length)
 			{
-				GameObject stairObj = GameObject.Instantiate(template.stair[obj.variant], new Vector3(obj.position[0], 0, obj.position[1]), Quaternion.Euler(0, obj.rotation, 0), parent.transform);
+				GameObject gObj = GameObject.Instantiate(template.stair[obj.variant], new Vector3(obj.position[0], 0, obj.position[1]), Quaternion.Euler(0, obj.rotation, 0), parent.transform);
+				ObjectMarker marker = gObj.GetComponent<ObjectMarker>();
+				if (marker != null)
+					marker.variant = obj.variant;
 			}
 			else
 			{
@@ -183,7 +198,10 @@ public static class Savesystem
 		{
 			if (obj.variant < template.moveable.Length)
 			{
-				GameObject.Instantiate(template.moveable[obj.variant], new Vector3(obj.position[0], 0, obj.position[1]), Quaternion.Euler(0, obj.rotation, 0), parent.transform);
+				GameObject gObj = GameObject.Instantiate(template.moveable[obj.variant], new Vector3(obj.position[0], 0, obj.position[1]), Quaternion.Euler(0, obj.rotation, 0), parent.transform);
+				ObjectMarker marker = gObj.GetComponent<ObjectMarker>();
+				if (marker != null)
+					marker.variant = obj.variant;
 			}
 			else
 			{
@@ -197,9 +215,12 @@ public static class Savesystem
 		{
 			if (obj.variant < template.sentry.Length)
 			{
-				GameObject sentry = GameObject.Instantiate(template.sentry[obj.variant], new Vector3(obj.position[0], 0, obj.position[1]), Quaternion.Euler(0, obj.rotation, 0), parent.transform);
+				GameObject gObj = GameObject.Instantiate(template.sentry[obj.variant], new Vector3(obj.position[0], 0, obj.position[1]), Quaternion.Euler(0, obj.rotation, 0), parent.transform);
+				ObjectMarker marker = gObj.GetComponent<ObjectMarker>();
+				if (marker != null)
+					marker.variant = obj.variant;
 
-				EnemySight sight = sentry.GetComponent<EnemySight>();
+				EnemySight sight = gObj.GetComponent<EnemySight>();
 				sight.viewDistance = obj.viewDistance;
 				sight.isContinous = obj.isContinous;
 				sight.onTime = obj.onTime;
@@ -220,7 +241,10 @@ public static class Savesystem
 		{
 			if (obj.variant < template.firepit.Length)
 			{
-				GameObject.Instantiate(template.firepit[obj.variant], new Vector3(obj.position[0], 0, obj.position[1]), Quaternion.Euler(0, obj.rotation, 0), parent.transform);
+				GameObject gObj = GameObject.Instantiate(template.firepit[obj.variant], new Vector3(obj.position[0], 0, obj.position[1]), Quaternion.Euler(0, obj.rotation, 0), parent.transform);
+				ObjectMarker marker = gObj.GetComponent<ObjectMarker>();
+				if (marker != null)
+					marker.variant = obj.variant;
 			}
 			else
 			{
