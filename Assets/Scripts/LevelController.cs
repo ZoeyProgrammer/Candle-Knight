@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class LevelController : MonoBehaviour
 {
@@ -14,6 +15,9 @@ public class LevelController : MonoBehaviour
 
 	public void LoadLevel()
 	{
-		Savesystem.LoadLevel(levelList[GameManger.currentLevel], levelTemplate);
+		if (GameManger.currentLevel < levelList.Length)
+			Savesystem.LoadLevel(levelList[GameManger.currentLevel], levelTemplate);
+		else
+			SceneManager.LoadSceneAsync("Title");
 	}
 }
