@@ -153,9 +153,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelList:
+  - Level_01
   - Level_02
-  - Level_01
-  - Level_01
+  - Level_03
   levelTemplate: {fileID: 11400000, guid: 021073951d2c5b147b3089511f221300, type: 2}
 --- !u!4 &45431414
 Transform:
