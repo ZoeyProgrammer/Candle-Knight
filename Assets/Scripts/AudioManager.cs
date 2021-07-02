@@ -4,12 +4,13 @@ using UnityEngine;
 
 public class AudioManager : MonoBehaviour
 {
-	[SerializeField] private AudioClip backgroundMusic, tickSound = null;
-	[SerializeField] private AudioSource backgroundSource, SFXSource1, SFXSource2 = null;
+	[SerializeField] public AudioClip backgroundMusic, buttonPress, buttonDeactivation, playerStep, stairs, boxPush, sentryShoot, sentryDrip, fireCrackle, fireKindle, fireExtinguish = null;
+	[SerializeField] private AudioSource backgroundSource = null;
 
 	private void Start()
 	{
-		PlayBackgroundMusic();
+		if (backgroundSource != null)
+			PlayBackgroundMusic();
 	}
 
 	private void PlayBackgroundMusic()
@@ -18,8 +19,5 @@ public class AudioManager : MonoBehaviour
 		backgroundSource.Play();
 	}
 
-	// Depending on how the Design works:
-	//Either: A SoundSource for every kind of Soundeffect here (If all should play at the same time)
-	//Or: A few SoundSources for different kinds of SFX to Layer them over another (If the design just says that only a few should play at a time)
-	//Or: Just save the clips here, and make them available for everywhere else for local SoundSources (If the Design has some directional soulution)
+	//Just save the clips here, and make them available for everywhere else for local SoundSources (If the Design has some directional soulution)
 }

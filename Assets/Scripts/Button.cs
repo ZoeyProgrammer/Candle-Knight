@@ -9,10 +9,14 @@ public class Button : MonoBehaviour
 	[SerializeField] public bool isInverted = false;
 
 	private bool isPressed = false;
+	private AudioSource audioSrc = null;
+	private AudioManager audioMng = null;
 
 	private void Start()
 	{
 		GameManger.channels[channel] = isInverted;
+		audioMng = GameObject.FindObjectOfType<AudioManager>();
+		audioSrc = this.GetComponent<AudioSource>();
 	}
 
 	public void UpdateState()
@@ -28,6 +32,15 @@ public class Button : MonoBehaviour
 		if (other.tag == "Player" || (allowBoxes && other.tag == "Moveables" ))
 		{
 			isPressed = true;
+			if (audioMng.buttonPress != null)
+			{
+				audioSrc.clip = audioMng.buttonPress;
+				audioSrc.Play();
+			}
+			else
+			{
+				Debug.LogWarning("Not found sound ButtonPress");
+			}
 			UpdateState();
 		}
 	}
@@ -37,6 +50,15 @@ public class Button : MonoBehaviour
 		if (other.tag == "Player" || (allowBoxes && other.tag == "Moveables"))
 		{
 			isPressed = false;
+			if (audioMng.buttonDeactivation != null)
+			{
+				audioSrc.clip = audioMng.buttonDeactivation;
+				audioSrc.Play();
+			}
+			else
+			{
+				Debug.LogWarning("Not found sound ButtonDeactivation");
+			}
 			UpdateState();
 		}
 	}
