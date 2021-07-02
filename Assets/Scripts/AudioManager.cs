@@ -4,18 +4,22 @@ using UnityEngine;
 
 public class AudioManager : MonoBehaviour
 {
-	[SerializeField] public AudioClip backgroundMusic, buttonPress, buttonDeactivation, playerStep, stairs, boxPush, sentryShoot, sentryDrip, fireCrackle, fireKindle, fireExtinguish = null;
+	[SerializeField] public AudioClip atmoLoop, buttonPress, buttonDeactivation, doorOpen, doorClosing, playerStep, stairs, boxPush, sentryShoot, sentryDrip, fireCrackle, fireKindle, fireExtinguish = null;
+	[SerializeField] public AudioClip[] backgroundMusic = null;
 	[SerializeField] private AudioSource backgroundSource = null;
 
 	private void Start()
 	{
 		if (backgroundSource != null)
 			PlayBackgroundMusic();
+		else
+			Debug.LogWarning("No Audio Source Found");
 	}
 
 	private void PlayBackgroundMusic()
 	{
-		backgroundSource.clip = backgroundMusic;
+		int clip = Random.Range(0, backgroundMusic.Length);
+		backgroundSource.clip = backgroundMusic[clip];
 		backgroundSource.Play();
 	}
 
