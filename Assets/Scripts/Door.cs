@@ -55,7 +55,7 @@ public class Door : MonoBehaviour
 		{
             this.transform.position += Vector3.up * 2; //Temporary
             currentState = false;
-            if (audioMng.doorOpen != null)
+            if (audioMng != null && audioMng.doorOpen != null)
             {
                 audioSrc.clip = audioMng.doorOpen;
                 audioSrc.Play();
@@ -73,7 +73,7 @@ public class Door : MonoBehaviour
         {
             this.transform.position -= Vector3.up * 2; //Temporary
             currentState = true;
-            if (audioMng.doorClosing != null)
+            if (audioMng != null && audioMng.doorClosing != null)
             {
                 audioSrc.clip = audioMng.doorClosing;
                 audioSrc.Play();

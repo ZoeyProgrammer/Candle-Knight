@@ -32,7 +32,7 @@ public class Button : MonoBehaviour
 		if (other.tag == "Player" || (allowBoxes && other.tag == "Moveables" ))
 		{
 			isPressed = true;
-			if (audioMng.buttonPress != null)
+			if (audioMng != null && audioMng.buttonPress != null)
 			{
 				audioSrc.clip = audioMng.buttonPress;
 				audioSrc.Play();
@@ -50,7 +50,7 @@ public class Button : MonoBehaviour
 		if (other.tag == "Player" || (allowBoxes && other.tag == "Moveables"))
 		{
 			isPressed = false;
-			if (audioMng.buttonDeactivation != null)
+			if (audioMng != null && audioMng.buttonDeactivation != null)
 			{
 				audioSrc.clip = audioMng.buttonDeactivation;
 				audioSrc.Play();

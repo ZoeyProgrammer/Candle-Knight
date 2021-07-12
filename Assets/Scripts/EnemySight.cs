@@ -123,7 +123,7 @@ public class EnemySight : MonoBehaviour
             whisperTimer += 1;
             if (whisperTimer >= whisperTime)
 			{
-                if (audioMng.sentrWhispers != null)
+                if (audioMng != null && audioMng.sentrWhispers != null)
                 {
                     PlayWhispers();
                 }
@@ -155,7 +155,7 @@ public class EnemySight : MonoBehaviour
             if (!sightLine.enabled)
 			{
                 sightLine.enabled = true;
-                if (audioMng.sentryShoot != null)
+                if (audioMng != null && audioMng.sentryShoot != null)
                 {
                     mainAudioSrc.clip = audioMng.sentryShoot;
                     mainAudioSrc.Play();
@@ -167,7 +167,7 @@ public class EnemySight : MonoBehaviour
             if (sightLine.enabled)
 			{
                 sightLine.enabled = false;
-                if (audioMng.sentryDrip != null)
+                if (audioMng != null && audioMng.sentryDrip != null)
                 {
                     mainAudioSrc.clip = audioMng.sentryDrip;
                     mainAudioSrc.Play();

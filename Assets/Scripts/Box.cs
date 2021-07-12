@@ -22,7 +22,7 @@ public class Box : MonoBehaviour
 		if (!Physics.Raycast(transform.position + Vector3.up * 0.5f, direction, 1, layerMask))
 		{
 			this.gameObject.transform.position += direction;
-			if (audioMng.boxPush != null)
+			if (audioMng != null && audioMng.boxPush != null)
 			{
 				audioSrc.clip = audioMng.boxPush;
 				audioSrc.Play();
