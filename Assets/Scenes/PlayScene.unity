@@ -155,9 +155,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelList:
+  - testLvl
   - asdf
-  - asdf
-  - test
+  - testLvl
   levelTemplate: {fileID: 11400000, guid: 021073951d2c5b147b3089511f221300, type: 2}
 --- !u!4 &45431414
 Transform:
@@ -188,6 +188,8 @@ MonoBehaviour:
   atmoLoop: {fileID: 0}
   buttonPress: {fileID: 8300000, guid: e7f43457b33eb114e8481ec7a45a1ccc, type: 3}
   buttonDeactivation: {fileID: 8300000, guid: d532a740a065dfc4285f2194c52dca7d, type: 3}
+  doorOpen: {fileID: 8300000, guid: 1b3fe37eccf2f2c4b97c453cc39a5722, type: 3}
+  doorClosing: {fileID: 8300000, guid: a79123dd6e5e3244f95517daf1f99a27, type: 3}
   playerStep: {fileID: 0}
   stairs: {fileID: 0}
   boxPush: {fileID: 0}
@@ -213,7 +215,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 0.49
+  m_Volume: 0.1
   m_Pitch: 1
   Loop: 0
   Mute: 0
