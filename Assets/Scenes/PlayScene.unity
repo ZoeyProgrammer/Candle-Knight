@@ -192,16 +192,17 @@ MonoBehaviour:
   doorClosing: {fileID: 8300000, guid: a79123dd6e5e3244f95517daf1f99a27, type: 3}
   playerStep: {fileID: 0}
   stairs: {fileID: 0}
-  boxPush: {fileID: 0}
+  boxPush: {fileID: 8300000, guid: 8cd3f9f5e421f334badeb11b2f469062, type: 3}
   sentryShoot: {fileID: 8300000, guid: 91436ceb2e26ea549928b5c9b0c03726, type: 3}
-  sentryDrip: {fileID: 0}
-  fireCrackle: {fileID: 0}
+  sentryDrip: {fileID: 8300000, guid: df25a7f3680977744a1b66f34113ecce, type: 3}
   fireKindle: {fileID: 0}
   fireExtinguish: {fileID: 0}
   backgroundMusic:
-  - {fileID: 8300000, guid: d7a91997035a0844dbf8bccbf0dcc99a, type: 3}
-  - {fileID: 8300000, guid: edb2a2b3d76ccfc4c903052915d8d13f, type: 3}
-  - {fileID: 8300000, guid: 9e3921fdd73ee3342b7a656615daf1d3, type: 3}
+  - {fileID: 8300000, guid: bc0474cc418b5b84e96c775d08aabe8d, type: 3}
+  - {fileID: 8300000, guid: 8ad519044c330324c9d8c3eaadbcf34d, type: 3}
+  - {fileID: 8300000, guid: 5bc29df430f8bda4dbd542063185eea4, type: 3}
+  sentrWhispers:
+  - {fileID: 8300000, guid: 0c0c147a2c483ba44a883ca0daf7d6ef, type: 3}
   backgroundSource: {fileID: 45431416}
 --- !u!82 &45431416
 AudioSource:

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class AudioManager : MonoBehaviour
 {
-	[SerializeField] public AudioClip atmoLoop, buttonPress, buttonDeactivation, doorOpen, doorClosing, playerStep, stairs, boxPush, sentryShoot, sentryDrip, fireCrackle, fireKindle, fireExtinguish = null;
+	[SerializeField] public AudioClip atmoLoop, buttonPress, buttonDeactivation, doorOpen, doorClosing, playerStep, stairs, boxPush, sentryShoot, sentryDrip, fireKindle, fireExtinguish = null;
 	[SerializeField] public AudioClip[] backgroundMusic, sentrWhispers = null;
 	[SerializeField] private AudioSource backgroundSource = null;
 
