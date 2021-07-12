@@ -11,10 +11,15 @@ public class Door : MonoBehaviour
     private bool currentState = true;
     private bool channelState = false;
 
-	private void Start()
+    private AudioSource audioSrc = null;
+    private AudioManager audioMng = null;
+
+    private void Start()
 	{
         UpdateState();
-	}
+        audioMng = GameObject.FindObjectOfType<AudioManager>();
+        audioSrc = this.GetComponent<AudioSource>();
+    }
 
 	private void Update()
 	{
@@ -50,6 +55,15 @@ public class Door : MonoBehaviour
 		{
             this.transform.position += Vector3.up * 2; //Temporary
             currentState = false;
+            if (audioMng != null && audioMng.doorOpen != null)
+            {
+                audioSrc.clip = audioMng.doorOpen;
+                audioSrc.Play();
+            }
+            else
+            {
+                Debug.LogWarning("Not found sound DoorOpen");
+            }
         }
 	}
 
@@ -59,6 +73,15 @@ public class Door : MonoBehaviour
         {
             this.transform.position -= Vector3.up * 2; //Temporary
             currentState = true;
+            if (audioMng != null && audioMng.doorClosing != null)
+            {
+                audioSrc.clip = audioMng.doorClosing;
+                audioSrc.Play();
+            }
+            else
+            {
+                Debug.LogWarning("Not found sound DoorClosing");
+            }
         }
     }
 

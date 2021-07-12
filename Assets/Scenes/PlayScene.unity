@@ -133,6 +133,8 @@ GameObject:
   m_Component:
   - component: {fileID: 45431414}
   - component: {fileID: 45431413}
+  - component: {fileID: 45431415}
+  - component: {fileID: 45431416}
   m_Layer: 0
   m_Name: LevelController
   m_TagString: Untagged
@@ -153,9 +155,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelList:
+  - testLvl
   - asdf
-  - asdf
-  - test
+  - testLvl
   levelTemplate: {fileID: 11400000, guid: 021073951d2c5b147b3089511f221300, type: 2}
 --- !u!4 &45431414
 Transform:
@@ -171,6 +173,124 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &45431415
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 45431412}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5764e885f91acfb468ad2547ca43c97d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  atmoLoop: {fileID: 0}
+  buttonPress: {fileID: 8300000, guid: e7f43457b33eb114e8481ec7a45a1ccc, type: 3}
+  buttonDeactivation: {fileID: 8300000, guid: d532a740a065dfc4285f2194c52dca7d, type: 3}
+  doorOpen: {fileID: 8300000, guid: 1b3fe37eccf2f2c4b97c453cc39a5722, type: 3}
+  doorClosing: {fileID: 8300000, guid: a79123dd6e5e3244f95517daf1f99a27, type: 3}
+  playerStep: {fileID: 0}
+  stairs: {fileID: 0}
+  boxPush: {fileID: 8300000, guid: 8cd3f9f5e421f334badeb11b2f469062, type: 3}
+  sentryShoot: {fileID: 8300000, guid: 91436ceb2e26ea549928b5c9b0c03726, type: 3}
+  sentryDrip: {fileID: 8300000, guid: df25a7f3680977744a1b66f34113ecce, type: 3}
+  fireKindle: {fileID: 0}
+  fireExtinguish: {fileID: 0}
+  backgroundMusic:
+  - {fileID: 8300000, guid: bc0474cc418b5b84e96c775d08aabe8d, type: 3}
+  - {fileID: 8300000, guid: 8ad519044c330324c9d8c3eaadbcf34d, type: 3}
+  - {fileID: 8300000, guid: 5bc29df430f8bda4dbd542063185eea4, type: 3}
+  sentrWhispers:
+  - {fileID: 8300000, guid: 0c0c147a2c483ba44a883ca0daf7d6ef, type: 3}
+  backgroundSource: {fileID: 45431416}
+--- !u!82 &45431416
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 45431412}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 0.1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 1000
+  Pan2D: 0
+  rolloffMode: 2
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &325710579
 GameObject:
   m_ObjectHideFlags: 0
@@ -278,7 +398,6 @@ GameObject:
   m_Component:
   - component: {fileID: 691942502}
   - component: {fileID: 691942501}
-  - component: {fileID: 691942500}
   - component: {fileID: 691942499}
   - component: {fileID: 691942503}
   m_Layer: 0
@@ -320,14 +439,6 @@ MonoBehaviour:
   m_RequiresDepthTexture: 0
   m_RequiresColorTexture: 0
   m_Version: 2
---- !u!81 &691942500
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 691942498}
-  m_Enabled: 1
 --- !u!20 &691942501
 Camera:
   m_ObjectHideFlags: 0

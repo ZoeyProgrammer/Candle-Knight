@@ -28,11 +28,11 @@ public class ResetManager : MonoBehaviour
 
 	private void Reset(InputAction.CallbackContext context)
 	{
-		SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+		SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().name);
 	}
 
 	private void Menu(InputAction.CallbackContext context)
 	{
-		SceneManager.LoadScene("Title");
+		SceneManager.LoadSceneAsync("Title");
 	}
 }
