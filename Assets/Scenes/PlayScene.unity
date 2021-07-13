@@ -190,7 +190,7 @@ MonoBehaviour:
   buttonDeactivation: {fileID: 8300000, guid: d532a740a065dfc4285f2194c52dca7d, type: 3}
   doorOpen: {fileID: 8300000, guid: 1b3fe37eccf2f2c4b97c453cc39a5722, type: 3}
   doorClosing: {fileID: 8300000, guid: a79123dd6e5e3244f95517daf1f99a27, type: 3}
-  playerStep: {fileID: 0}
+  playerStep: {fileID: 8300000, guid: 1b3fe37eccf2f2c4b97c453cc39a5722, type: 3}
   stairs: {fileID: 0}
   boxPush: {fileID: 8300000, guid: 8cd3f9f5e421f334badeb11b2f469062, type: 3}
   sentryShoot: {fileID: 8300000, guid: 91436ceb2e26ea549928b5c9b0c03726, type: 3}

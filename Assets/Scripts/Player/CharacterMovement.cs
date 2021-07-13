@@ -16,6 +16,8 @@ public class CharacterMovement : MonoBehaviour
 	public bool isLit = true;
 
 	private Vector2 controllerPos = Vector2.zero;
+	private AudioSource audioSrc = null;
+	private AudioManager audioMng = null;
 
 	void Awake()
 	{
@@ -27,6 +29,12 @@ public class CharacterMovement : MonoBehaviour
 		inputMaster.Player.Left.performed += Left;
 		inputMaster.Player.TurnLeft.performed += TurnLeft;
 		inputMaster.Player.TurnRight.performed += TurnLeft;
+	}
+
+	private void Start()
+	{
+		audioMng = GameObject.FindObjectOfType<AudioManager>();
+		audioSrc = this.GetComponent<AudioSource>();
 	}
 
 	private void OnEnable()
@@ -51,6 +59,15 @@ public class CharacterMovement : MonoBehaviour
 		headFlame.Play();
 	}
 
+	private void PlayStepSound()
+	{
+		if (audioMng != null && audioMng.playerStep != null)
+		{
+			audioSrc.clip = audioMng.playerStep;
+			audioSrc.Play();
+		}
+	}
+
 	void Forwards(InputAction.CallbackContext context)
 	{
 		RaycastHit hit;
@@ -60,6 +77,7 @@ public class CharacterMovement : MonoBehaviour
 			{
 				this.gameObject.transform.position += Vector3.forward;
 				GameManger.tick++;
+				PlayStepSound();
 			}
 		}
 		else if (hit.collider.gameObject.GetComponent<Box>() != null)
@@ -77,6 +95,7 @@ public class CharacterMovement : MonoBehaviour
 			{
 				this.gameObject.transform.position -= Vector3.forward;
 				GameManger.tick++;
+				PlayStepSound();
 			}
 		}
 		else if (hit.collider.gameObject.GetComponent<Box>() != null)
@@ -94,6 +113,7 @@ public class CharacterMovement : MonoBehaviour
 			{
 				this.gameObject.transform.position += Vector3.right;
 				GameManger.tick++;
+				PlayStepSound();
 			}
 		}
 		else if (hit.collider.gameObject.GetComponent<Box>() != null)
@@ -111,6 +131,7 @@ public class CharacterMovement : MonoBehaviour
 			{
 				this.gameObject.transform.position -= Vector3.right;
 				GameManger.tick++;
+				PlayStepSound();
 			}
 		}
 		else if (hit.collider.gameObject.GetComponent<Box>() != null)
