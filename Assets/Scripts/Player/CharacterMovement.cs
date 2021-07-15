@@ -16,7 +16,7 @@ public class CharacterMovement : MonoBehaviour
 	public bool isLit = true;
 
 	private Vector2 controllerPos = Vector2.zero;
-	private AudioSource audioSrc = null;
+	[SerializeField] private AudioSource stepAudioSrc, flameAudioSrc = null;
 	private AudioManager audioMng = null;
 
 	void Awake()
@@ -34,7 +34,6 @@ public class CharacterMovement : MonoBehaviour
 	private void Start()
 	{
 		audioMng = GameObject.FindObjectOfType<AudioManager>();
-		audioSrc = this.GetComponent<AudioSource>();
 	}
 
 	private void OnEnable()
@@ -49,12 +48,24 @@ public class CharacterMovement : MonoBehaviour
 
 	public void DisableFlame()
 	{
+		if (audioMng != null && audioMng.fireExtinguish != null)
+		{
+			flameAudioSrc.clip = audioMng.fireExtinguish;
+			flameAudioSrc.Play();
+		}
+
 		isLit = false;
 		headFlame.Stop();
 	}
 
 	public void EnableFlame()
 	{
+		if (audioMng != null && audioMng.fireKindle != null)
+		{
+			flameAudioSrc.clip = audioMng.fireKindle;
+			flameAudioSrc.Play();
+		}
+
 		isLit = true;
 		headFlame.Play();
 	}
@@ -63,8 +74,8 @@ public class CharacterMovement : MonoBehaviour
 	{
 		if (audioMng != null && audioMng.playerStep != null)
 		{
-			audioSrc.clip = audioMng.playerStep;
-			audioSrc.Play();
+			stepAudioSrc.clip = audioMng.playerStep;
+			stepAudioSrc.Play();
 		}
 	}
 
