@@ -5,17 +5,22 @@ using UnityEngine;
 public class Door : MonoBehaviour
 {
     [Tooltip("True = Closed | False = Open")]
-    [SerializeField] public int channel = 0;
+   //[SerializeField] public int channel = 0;
+    [SerializeField] public int[] channels = new int[] { };
     [SerializeField] public bool isInverted = false; // Standard: True = Closed | False = Open
 
     private bool currentState = true;
-    private bool channelState = false;
+    //private bool channelState = false;
+    private bool[] channelStates = new bool[] { };
 
     private AudioSource audioSrc = null;
     private AudioManager audioMng = null;
 
     private void Start()
 	{
+        if (channels != null)
+            channelStates = new bool[channels.Length];
+
         UpdateState();
         audioMng = GameObject.FindObjectOfType<AudioManager>();
         audioSrc = this.GetComponent<AudioSource>();
@@ -23,17 +28,33 @@ public class Door : MonoBehaviour
 
 	private void Update()
 	{
+        if (channels == null)
+            return;
+
+        if (channels.Length != channelStates.Length)
+            channelStates = new bool[channels.Length];
+
         //Update if Channel state has changed
-		if (GameManger.channels[channel] != channelState)
+        for (int i = 0; i < channels.Length; i++)
 		{
-            UpdateState();
+            if (GameManger.channels[channels[i]] != channelStates[i])
+            {
+                UpdateState();
+            }
         }
 	}
 
     public void UpdateState()
-	{
-        channelState = GameManger.channels[channel];
-        if (channelState)
+    {
+        if (channels == null)
+            return;
+
+        for (int i = 0; i < channels.Length; i++)
+        {
+            channelStates[i] = GameManger.channels[channels[i]];
+        }
+
+        if (AreAllTrue(channelStates)) //Check if all ChannelStates are True here
         {
             if (isInverted)
                 CloseDoor();
@@ -91,5 +112,15 @@ public class Door : MonoBehaviour
             CloseDoor();
         else
             OpenDoor();
+    }
+
+    public static bool AreAllTrue(bool[] array)
+    {
+        foreach (bool b in array)
+        {
+            if (!b)
+                return false;
+        }
+        return true;
     }
 }

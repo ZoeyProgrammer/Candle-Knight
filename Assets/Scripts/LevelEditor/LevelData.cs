@@ -132,7 +132,7 @@ public class ButtonData : ObjectData
 [System.Serializable]
 public class DoorData : ObjectData
 {
-	public int channel = 0;
+	public int[] channels = new int[] { };
 	public bool isInverted = false;
 
 	public DoorData(GameObject obj) : base(obj)
@@ -140,7 +140,7 @@ public class DoorData : ObjectData
 		Door door = obj.GetComponent<Door>();
 		if (door != null)
 		{
-			channel = door.channel;
+			channels = door.channels;
 			isInverted = door.isInverted;
 		}
 	}

@@ -20,7 +20,7 @@ public class DoorInspector : MonoBehaviour
 		{
 			currentSelected = door;
 			isInvertedToggle.isOn = door.isInverted;
-			channelSlider.Value = door.channel;
+			//channelSlider.Value = door.channel;
 		}
 		else
 			Debug.LogWarning("No Door Found");
@@ -34,7 +34,7 @@ public class DoorInspector : MonoBehaviour
 
 	public void ChannelSlider(int value)
 	{
-		currentSelected.channel = value;
+		//currentSelected.channel = value;
 		currentSelected.UpdateState();
 	}
 }

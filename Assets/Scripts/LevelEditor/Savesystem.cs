@@ -167,7 +167,7 @@ public static class Savesystem
 
 				Door door = gObj.GetComponent<Door>();
 				door.isInverted = obj.isInverted;
-				door.channel = obj.channel;
+				door.channels = obj.channels;
 			}
 			else
 			{
